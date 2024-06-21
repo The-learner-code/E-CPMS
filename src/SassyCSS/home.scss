@@ -1,0 +1,94 @@
+// General container styling
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+// Button styling
+.btn {
+    background: #fff;
+    color: #212121;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Image inside button styling
+.btn img {
+    width: 20px;
+    margin-left: 10px;
+}
+
+// Navbar styling
+nav {
+    width: 100%;
+    padding: 4px 0;
+    position: fixed;
+    top: 1%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+
+    // Navbar logo styling
+    .nv-logo {
+        border-radius: 10px;
+        width: 210px;
+        font-size: 26px;
+        font-weight: bolder;
+    }
+
+    // Navbar list item styling
+    ul li {
+        display: inline-block;
+        list-style: none;
+        margin: 10px 30px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bolder;
+    }
+
+    // Dark navbar background styling for fixed state
+    .dark-nav {
+        background: #16a085;
+        transition: 0.5s;
+    }
+}
+
+// Hero section styling
+.hero-lp {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(45deg, rgba(0, 128, 128, 0.8), rgba(222, 184, 135, 0.8)), url('../Assets/system-with-chair.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Text content styling in Hero section
+    .hero-lp-text {
+        text-align: center;
+        max-width: 800px;
+
+        // Main heading styling
+        h1 {
+            font-size: 60px;
+            font-weight: 600;
+        }
+
+        // Paragraph text styling
+        p {
+            max-width: 700px;
+            margin: 10px auto 20px;
+            line-height: 1.4;
+        }
+    }
+}
