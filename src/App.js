@@ -3,6 +3,8 @@ import Home from './Pages/HomePage';
 import LoginAndRegister from './Pages/Login_Register';
 import ViewProfile from './Pages/ViewProfile';
 import UpdateProfile from './Pages/UpdateProfile';
+import ViewPlacementResults from './Pages/ViewPlacementResults';
+
 const App = () => {
   return (
     <div>
@@ -12,6 +14,7 @@ const App = () => {
           <Route path='/LoginAndRegister' element={<LoginAndRegister />} />
           <Route path='/ViewProfile' element={<ViewProfile />} />
           <Route path='/UpdateProfile' element={<UpdateProfile />} />
+          <Route path='/ViewPlacementResults' element={<ViewPlacementResults />} />
         </Routes>
       </BrowserRouter>
     </div>

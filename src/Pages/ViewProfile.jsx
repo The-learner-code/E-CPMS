@@ -88,7 +88,6 @@ const ViewProfile = () => {  // Define ViewProfile functional component
                 <label>Department :</label>
                 <span>{profileData?.Department || "N/A"}</span>
               </div>
-              {/* Similar fields for other details */}
               <div className="forminput">
                 <label>Semester :</label>
                 <span>{profileData?.Current_Semester || "N/A"}</span>
