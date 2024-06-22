@@ -42,7 +42,7 @@ const Stu_Sidebar = () => {  // Define Stu_Sidebar functional component
                         <AssignmentTurnedInIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
                         <span>Placement Result</span>  {/* Render text 'Placement Result' */} 
                     </li>
-                    <li onClick={() => navigate('/StuNotificationpage')}>  {/* Render list item for notification page with click event to navigate */}
+                    <li onClick={() => navigate('/ViewNotificationMsg')}>  {/* Render list item for notification page with click event to navigate */}
                         <NotificationsIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
                         <span>Notifications</span>  {/* Render text 'Notifications' */}
                     </li>

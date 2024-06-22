@@ -1,0 +1,25 @@
+.notification {
+    display: flex;
+    width: 100%;
+
+    .stunotificationcontainer {
+        flex: 6;
+
+        .listcontainer {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 10px;
+            margin: 10px;
+            width: 1240px;
+            background-color: rgb(230, 227, 227);
+            border-radius: 10px;
+
+            .list-title {
+                font-weight: 600;
+                color: #16a085;
+                margin-bottom: 15px;
+            }
+        }
+
+    }
+}

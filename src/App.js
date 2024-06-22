@@ -4,6 +4,7 @@ import LoginAndRegister from './Pages/Login_Register';
 import ViewProfile from './Pages/ViewProfile';
 import UpdateProfile from './Pages/UpdateProfile';
 import ViewPlacementResults from './Pages/ViewPlacementResults';
+import ViewNotificationMsg from './Pages/ViewNotificationMsg';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path='/ViewProfile' element={<ViewProfile />} />
           <Route path='/UpdateProfile' element={<UpdateProfile />} />
           <Route path='/ViewPlacementResults' element={<ViewPlacementResults />} />
+          <Route path='/ViewNotificationMsg' element={<ViewNotificationMsg />} />
         </Routes>
       </BrowserRouter>
     </div>

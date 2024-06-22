@@ -3,7 +3,7 @@ import Navbar from '../Components/navbar/Navbar';
 import Table from '../Components/tables/ViewResults';
 import '../SassyCSS/viewplacementresults.scss';
 
-const StuPlacementRes = () => {
+const ViewPlacementResults = () => {
   return (
     <div className='result'>
       <Sidebar />
@@ -18,4 +18,4 @@ const StuPlacementRes = () => {
   );
 };
 
-export default StuPlacementRes
+export default ViewPlacementResults
