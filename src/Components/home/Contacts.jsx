@@ -13,6 +13,10 @@ import location_icon from '../../Assets/location-icon.png';
 // Import the white arrow icon
 import white_arrow from '../../Assets/white-arrow.png';
 
+// Assuming you have initialized Firestore as `db`
+import { db } from '../../firebase';
+import { setDoc, doc } from "firebase/firestore"; // Firestore imports
+
 // Define the Contacts functional component
 const Contacts = () => {
     // Declare a state variable 'result' with initial value as an empty string
@@ -26,25 +30,42 @@ const Contacts = () => {
         setResult("Sending....");
         // Create a new FormData object from the form elements
         const formData = new FormData(event.target);
-
+    
         // Append access key to the form data
         formData.append("access_key", "960cf01f-f92d-4853-ac73-1136637d5814");
-
+    
         // Send form data to the server using fetch API
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST", // HTTP method
             body: formData // Form data
         });
-
+    
         // Parse the JSON response from the server
         const data = await response.json();
-
+    
         // Check if the form submission was successful
         if (data.success) {
             // Update the result state to indicate success
             setResult("Form Submitted Successfully");
             // Reset the form fields
             event.target.reset();
+    
+            // Save form data to Firestore using docRef and setDoc
+            const emailId = formData.get('Email_id'); // Use Email_id as document name
+            const docRef = doc(db, `TechSupport/${emailId}`);
+    
+            // Format timestamp to IST (Indian Standard Time)
+            const ISTDateString = new Date().toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata'
+            });
+    
+            await setDoc(docRef, {
+                Email_id: formData.get('Email_id'),
+                Registered_no: formData.get('Registered_no'),
+                Message: formData.get('Message'),
+                Timestamp: ISTDateString  // Save IST formatted timestamp as string
+            });
+    
         } else {
             // Log the error message
             console.log("Error", data);
@@ -52,6 +73,7 @@ const Contacts = () => {
             setResult(data.message);
         }
     };
+    
 
     // Return the JSX for the Contacts section
     return (
@@ -78,14 +100,14 @@ const Contacts = () => {
                 {/* Form with onSubmit handler */}
                 <form onSubmit={onSubmit}>
                     {/* Label and input for name */}
-                    <label>Your name</label>
-                    <input type="text" name='lp_name' placeholder='Enter your name' required />
+                    <label>Your Email Id</label>
+                    <input type="email" name='Email_id' placeholder='Enter your Email' required />
                     {/* Label and input for registered number */}
                     <label>Registered Number</label>
-                    <input type="tel" name='lp_registered_no' placeholder='Enter your registered No' required />
+                    <input type="tel" name='Registered_no' placeholder='Enter your registered No' required />
                     {/* Label and textarea for message */}
                     <label>Write your message here</label>
-                    <textarea name="lp_message" rows="6" placeholder='Enter your message' required></textarea>
+                    <textarea name="Message" rows="6" placeholder='Enter your message' required></textarea>
                     {/* Submit button with an icon */}
                     <button type='submit' className='btn dark-btn'>Submit now <img src={white_arrow} alt="" /></button>
                 </form>

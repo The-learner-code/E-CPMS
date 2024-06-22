@@ -42,7 +42,9 @@ function Login_Register() {
     };
 
     // Function to validate email format
-    const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com)$/.test(String(email).toLowerCase());
+    //const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com)$/.test(String(email).toLowerCase());
+    //const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com|ecpms\.gmail\.com)$/.test(String(email).toLowerCase());
+    const validateEmail = (email) => /^(?:[0-9]+(staff)?|ecpms)@gmail\.com$/.test(String(email).toLowerCase());
 
     // Function to handle registration process
     const handleRegister = async (e) => {
@@ -88,7 +90,7 @@ function Login_Register() {
                 created: user.metadata.creationTime, // User account creation time
                 signedIn: user.metadata.lastSignInTime, // Last sign-in time
                 uid: user.uid, // User UID
-                type: user.email.includes("staff") ? 'Staff' : 'Student' // User type based on email
+                type: user.email === "ecpms@gmail.com" ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
             };
 
             await setDoc(doc(db, "AuthDetails", user.uid), userData); // Save user data to Firestore
@@ -121,7 +123,7 @@ function Login_Register() {
             toast.success("Logged in Successfully...!", { autoClose: 2500 });
             setTimeout(() => {
                 if (trimmedEmail === "ecpms@gmail.com") { // Check if user is admin
-                    navigate('/UserCred'); // Navigate to admin page
+                    navigate('/ListOfUsers'); // Navigate to admin page
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
                     navigate('/ListOfStudents'); // Navigate to staff page
                 } else {

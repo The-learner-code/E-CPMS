@@ -32,7 +32,6 @@ const Tablenotify = () => {
                     });
                 });
                 setNotifications(notificationsList);  // Update notifications state with fetched data
-                toast.success('Notifications fetched successfully');  // Notify success
             } catch (error) {
                 console.error("Error fetching notifications: ", error);
                 // Update notifications state to mark failed notifications

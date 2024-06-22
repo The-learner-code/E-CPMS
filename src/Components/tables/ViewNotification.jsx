@@ -20,7 +20,6 @@ const Tablenotify = () => {
                     timestamp: doc.data().timestamp ? doc.data().timestamp : 'No timestamp available'
                 }));
                 setNotifications(notificationsList);
-                toast.success('Notifications fetched successfully');
             } catch (error) {
                 console.error("Error fetching notifications: ", error);
                 toast.error('Failed to fetch notifications');

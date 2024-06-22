@@ -10,6 +10,7 @@ import BatchEntryForm from './Pages/BatchEntryForm';  // Importing the BatchEntr
 import AddPlacementResults from './Pages/AddPlacementResults';  // Importing the AddPlacementResults component
 import MsgEntryForm from './Pages/MsgEntryForm';  // Importing the MsgEntryForm component
 import AddNotification from './Pages/AddNotification';  // Importing the AddNotification component
+import ListOfUsers from './Pages/ListOfUsers'; // Importing the ListOfUsers component
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/AddPlacementResults' element={<AddPlacementResults />} />  {/* Route for AddPlacementResults page */}
           <Route path='/MsgEntryForm' element={<MsgEntryForm />} />  {/* Route for MsgEntryForm page */}
           <Route path='/AddNotification' element={<AddNotification />} />  {/* Route for AddNotification page */}
+          <Route path='/ListOfUsers' element={<ListOfUsers />} /> {/* Route for ListOfUsers page */}
         </Routes>
       </BrowserRouter>
     </div>
