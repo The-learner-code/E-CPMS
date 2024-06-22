@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, db, storage } from "../firebase"; // Firebase imports
 import { setDoc, doc, getDoc } from "firebase/firestore"; // Firestore imports
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Storage imports
-import { ToastContainer, toast } from 'react-toastify'; // Toast notifications
+import { toast, toastContainer } from '../toastservice'; // Toast notifications
 import { useNavigate } from 'react-router-dom'; // React Router navigation
 import Navbar from "../Components/navbar/Navbar"; // Navbar component
 import Sidebar from "../Components/sidebar/Stu_Sidebar"; // Sidebar component
@@ -39,7 +39,7 @@ const UpdateProfile = () => {
             toast.error("Not a valid user..Login again...!");
             setTimeout(() => {
                 navigate('/');
-            }, 2000);
+            }, 2500);
         }
     }, [navigate]);
 
@@ -214,7 +214,7 @@ const UpdateProfile = () => {
             toast.success(`${user.email} Profile updated successfully!`);
             setTimeout(() => {
                 navigate('/ViewProfile');
-            }, 2000);
+            }, 2500);
 
             // Reset form fields
             resetForm();
@@ -226,8 +226,7 @@ const UpdateProfile = () => {
     return (
         <div className="new">
             {/* Toast notification container */}
-            <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-
+           {toastContainer}
             {/* Sidebar component */}
             <Sidebar />
 

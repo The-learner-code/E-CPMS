@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';  // Import React, useState, 
 import { collection, getDocs } from 'firebase/firestore';  // Import collection and getDocs from Firestore
 import { db } from '../../firebase'; // Ensure this path matches your project structure
 import { DataGrid } from '@mui/x-data-grid';  // Import DataGrid component from Material-UI X package
+import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
 import '../../SassyCSS/table.scss';  // Import custom CSS styles for table
 
 const Tablenotify = () => {
@@ -31,10 +32,12 @@ const Tablenotify = () => {
                     });
                 });
                 setNotifications(notificationsList);  // Update notifications state with fetched data
+                toast.success('Notifications fetched successfully');  // Notify success
             } catch (error) {
                 console.error("Error fetching notifications: ", error);
                 // Update notifications state to mark failed notifications
                 setNotifications((prevNotifications) => prevNotifications.map(notification => ({ ...notification, status: 'Failed' })));
+                toast.error('Failed to fetch notifications');  // Notify failure
             } finally {
                 setLoading(false);  // Set loading state to false after fetching
             }
@@ -68,6 +71,7 @@ const Tablenotify = () => {
 
     return (
         <div className="table-container">
+            {toastContainer}
             <div style={{ height: 450, width: '100%' }}>
                 {/* Render DataGrid with notifications data */}
                 <DataGrid 

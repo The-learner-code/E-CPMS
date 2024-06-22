@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore'; // Import Firestore functions for document operations
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
 import { db } from '../firebase'; // Import Firebase Firestore instance
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast for notifications
+import { toast, toastContainer } from '../toastservice'; // Import ToastContainer and toast for notifications
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS for notifications
 import Sidebar from '../Components/sidebar/Staff_Sidebar'; // Import Sidebar component
 import Navbar from '../Components/navbar/Navbar'; // Import Navbar component
@@ -45,7 +45,7 @@ const MsgEntryForm = () => {
             setLink(''); // Clear the link input field
             setTimeout(() => {
                 navigate('/AddNotification'); // Navigate to AddNotification page after 2 seconds
-            }, 2000);
+            }, 2500);
         } catch (error) {
             console.error("Error adding notification: ", error); // Log error to console
             toast.error('Failed to add notification'); // Error toast notification
@@ -54,6 +54,7 @@ const MsgEntryForm = () => {
 
     return (
         <div className='add'>
+            {toastContainer}
             <Sidebar /> {/* Render Sidebar component */}
             <div className="addnotifycontainer">
                 <Navbar /> {/* Render Navbar component */}
@@ -113,7 +114,6 @@ const MsgEntryForm = () => {
                     </form>
                 </div>
             </div>
-            <ToastContainer /> {/* Toast container for notifications */}
         </div>
     );
 };

@@ -11,10 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 // Import ToastContainer and toast for notifications
-import { ToastContainer, toast } from 'react-toastify';
-
 // Import Toastify CSS for styling notifications
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, toastContainer } from '../toastservice';
 
 // Import Firebase auth and Firestore database
 import { auth, db } from '../firebase';
@@ -99,7 +97,7 @@ function Login_Register() {
             setTimeout(() => {
                 toggle(true); // Toggle to sign-in view
                 resetForm(); // Reset form inputs
-            }, 2000);
+            }, 2500);
         } catch (error) {
             toast.error(`Registration Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
             resetForm(); // Reset form inputs on error
@@ -129,7 +127,7 @@ function Login_Register() {
                 } else {
                     navigate('/ViewProfile'); // Navigate to profile page for students
                 }
-            }, 2000);
+            }, 2500);
         } catch (error) {
             toast.error(`Login Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
             resetForm(); // Reset form inputs on error
@@ -162,10 +160,10 @@ function Login_Register() {
         <Components.Body>
             {/* Back to home button */}
             <Components.BackButton onClick={() => navigate('/')}>Back to Home</Components.BackButton>
-            
+
             {/* Toast container for displaying notifications */}
-            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-            
+            {toastContainer}
+
             {/* Container for login and registration forms */}
             <Components.Container>
                 {/* Sign up container */}
@@ -174,16 +172,16 @@ function Login_Register() {
                     <Components.Form onSubmit={handleRegister}>
                         {/* Register form title */}
                         <Components.Title>Get Onboard</Components.Title>
-                        
+
                         {/* Register email input */}
                         <Components.Input type='email' placeholder='Enter Email Id' value={remail} onChange={(e) => setRemail(e.target.value)} required />
-                        
+
                         {/* Register password input */}
                         <Components.Input type='password' placeholder='Enter Password' value={rpass} onChange={(e) => setRpass(e.target.value)} required />
-                        
+
                         {/* Register confirm password input */}
                         <Components.Input type='password' placeholder='Confirm Password' value={rconpass} onChange={(e) => setRconpass(e.target.value)} required />
-                        
+
                         {/* Register button */}
                         <Components.Button type="submit">Register Today</Components.Button>
                     </Components.Form>
@@ -195,16 +193,16 @@ function Login_Register() {
                     <Components.Form onSubmit={handleLogin}>
                         {/* Login form title */}
                         <Components.Title>Authenticate</Components.Title>
-                        
+
                         {/* Login email input */}
                         <Components.Input type='email' placeholder='Enter Email Id' value={lemail} onChange={(e) => setLemail(e.target.value)} required />
-                        
+
                         {/* Login password input */}
                         <Components.Input type='password' placeholder='Enter Password' value={lpass} onChange={(e) => setLpass(e.target.value)} required />
-                        
+
                         {/* Forgot password link */}
                         <Components.Anchor href='#' onClick={handleForgotPassword}>Forgot your password...!</Components.Anchor>
-                        
+
                         {/* Login button */}
                         <Components.Button type="submit">LogIn</Components.Button>
                     </Components.Form>
@@ -218,12 +216,12 @@ function Login_Register() {
                         <Components.LeftOverlayPanel signinIn={signIn}>
                             {/* Overlay title */}
                             <Components.Title>Unlock Your Potential!</Components.Title>
-                            
+
                             {/* Overlay paragraph */}
                             <Components.Paragraph>
                                 Dive into a world of opportunities. Sign in with your credentials to explore your future.
                             </Components.Paragraph>
-                            
+
                             {/* Ghost button to toggle to login */}
                             <Components.GhostButton onClick={() => toggle(true)}>
                                 Log In
@@ -234,12 +232,12 @@ function Login_Register() {
                         <Components.RightOverlayPanel signinIn={signIn}>
                             {/* Overlay title */}
                             <Components.Title>Join the Journey!</Components.Title>
-                            
+
                             {/* Overlay paragraph */}
                             <Components.Paragraph>
                                 Embark on an adventure of learning and growth. Provide your personal details and let's begin.
                             </Components.Paragraph>
-                            
+
                             {/* Ghost button to toggle to register */}
                             <Components.GhostButton onClick={() => toggle(false)}>
                                 Register Here

@@ -10,12 +10,6 @@ import Sidebar from '../Components/sidebar/Staff_Sidebar';
 // Importing the Navbar component which likely contains the top navigation bar content
 import Navbar from '../Components/navbar/Navbar';
 
-// Importing CSS for react-toastify to style toast notifications
-import 'react-toastify/dist/ReactToastify.css';
-
-// Importing ToastContainer to render toast notifications and toast to trigger notifications
-import { ToastContainer, toast } from 'react-toastify';
-
 // Importing the Table component to display the notifications
 import Table from '../Components/tables/Notification';
 
@@ -25,19 +19,6 @@ const AddNotification = () => {
 
   return (
     <div className='notification'>
-      {/* ToastContainer to display toast notifications with various settings */}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
       {/* Sidebar component for the navigation sidebar */}
       <Sidebar />
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';  // Import React, useState, 
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook from React Router
 import { auth, db } from "../firebase";  // Import auth and db from Firebase
 import { doc, getDoc } from "firebase/firestore";  // Import doc and getDoc from Firestore
-import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast from react-toastify
+import { toast, toastContainer } from '../toastservice'; // Import ToastContainer and toast from react-toastify
 import Sidebar from '../Components/sidebar/Stu_Sidebar';  // Import Sidebar component
 import Navbar from '../Components/navbar/Navbar';  // Import Navbar component
-import 'react-toastify/dist/ReactToastify.css';  // Import styles for Toastify
+
 import '../SassyCSS/viewprofile.scss';  // Import styles for view profile page
 
 const ViewProfile = () => {  // Define ViewProfile functional component
@@ -27,14 +27,14 @@ const ViewProfile = () => {  // Define ViewProfile functional component
           toast.warn("No data found. Redirecting to update profile page...");
           setTimeout(() => {
             navigate('/UpdateProfile');
-          }, 3000);
+          }, 2500);
         }
       } else {
         // Notify if user is not valid and redirect to login/register page
         toast.error("Not a valid user");
         setTimeout(() => {
           navigate('/LoginAndRegister');
-        }, 3000);
+        }, 2500);
       }
     };
 
@@ -44,7 +44,7 @@ const ViewProfile = () => {  // Define ViewProfile functional component
   return (
     <div className='profile'>
       {/* Render ToastContainer for notifications */}
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+     {toastContainer}
       <Sidebar />  {/* Render sidebar */}
       <div className="profilecontainer">
         <Navbar />  {/* Render Navbar */}

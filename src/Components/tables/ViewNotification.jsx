@@ -1,57 +1,37 @@
-// Importing necessary dependencies and components from React and other libraries
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore'; // Importing Firestore functions for data retrieval
-import { db } from '../../firebase'; // Importing the configured Firestore instance
-import { DataGrid } from '@mui/x-data-grid'; // Importing the DataGrid component for table display
-import '../../SassyCSS/table.scss'; // Importing custom CSS for styling the table
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { DataGrid } from '@mui/x-data-grid';
+import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
+import '../../SassyCSS/table.scss';
 
 const Tablenotify = () => {
-    // State to store the fetched notifications
     const [notifications, setNotifications] = useState([]);
-    // State to manage loading status
     const [loading, setLoading] = useState(true);
-    // State to manage the number of rows per page
     const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
-        // Function to fetch notifications from Firestore
         const fetchNotifications = async () => {
             try {
-                // Get documents from 'Notification' collection
                 const querySnapshot = await getDocs(collection(db, 'Notification_Logs'));
-                const notificationsList = [];
-                // Iterate over each document and extract data
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    // Use timestamp field directly as a string, default to 'No timestamp available' if not present
-                    const timestamp = data.timestamp ? data.timestamp : 'No timestamp available';
-                    // Push the notification data to the list, ensuring all fields are included
-                    notificationsList.push({
-                        id: doc.id,
-                        type: data.type,
-                        content: data.content,
-                        timestamp,
-                        valid_from: data.valid_from,
-                        valid_to: data.valid_to,
-                        link: data.link
-                    });
-                });
-                // Update state with the fetched notifications
+                const notificationsList = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    timestamp: doc.data().timestamp ? doc.data().timestamp : 'No timestamp available'
+                }));
                 setNotifications(notificationsList);
+                toast.success('Notifications fetched successfully');
             } catch (error) {
-                // Log any errors encountered during fetch
                 console.error("Error fetching notifications: ", error);
+                toast.error('Failed to fetch notifications');
             } finally {
-                // Set loading to false after fetch attempt (success or failure)
                 setLoading(false);
             }
         };
 
-        // Call the fetch function
         fetchNotifications();
     }, []);
 
-    // Define columns for the DataGrid
     const columns = [
         { field: 'timestamp', headerName: 'Timestamp', width: 200 },
         { field: 'type', headerName: 'Type', width: 100 },
@@ -74,10 +54,9 @@ const Tablenotify = () => {
     ];
 
     return (
-        // Container for the DataGrid component
         <div className="table-container">
+            {toastContainer}
             <div style={{ height: 520, width: '100%' }}>
-                {/* DataGrid component to display notifications */}
                 <DataGrid
                     rows={notifications}
                     columns={columns}

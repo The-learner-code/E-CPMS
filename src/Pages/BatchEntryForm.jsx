@@ -5,8 +5,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Importing ToastContainer and toast from react-toastify to display notifications
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, toastContainer } from '../toastservice';
 
 // Importing Firebase Firestore instance
 import { db } from '../firebase';
@@ -76,15 +75,15 @@ const BatchEntryForm = () => {
   return (
     <div className='batch'>
       {/* ToastContainer to display toast notifications */}
-      <ToastContainer position="top-center" autoClose={4000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-      
+      {toastContainer}
+
       {/* Sidebar component for the navigation sidebar */}
       <Sidebar />
-      
+
       <div className="batchentrycontainer">
         {/* Navbar component for the top navigation bar */}
         <Navbar />
-        
+
         {/* Form container */}
         <div className="form-container">
           <h2>Batch Entry Form</h2>
@@ -101,7 +100,7 @@ const BatchEntryForm = () => {
                 placeholder="Enter multiple email IDs separated by commas or spaces"
               />
             </div>
-            
+
             {/* Department input field */}
             <div className="form-group">
               <label htmlFor="department">Department</label>
@@ -113,7 +112,7 @@ const BatchEntryForm = () => {
                 required
               />
             </div>
-            
+
             {/* Company name input field */}
             <div className="form-group">
               <label htmlFor="companyName">Company Name</label>
@@ -125,7 +124,7 @@ const BatchEntryForm = () => {
                 required
               />
             </div>
-            
+
             {/* Job role input field */}
             <div className="form-group">
               <label htmlFor="jobRole">Job Role</label>
@@ -137,7 +136,7 @@ const BatchEntryForm = () => {
                 required
               />
             </div>
-            
+
             {/* Submit button */}
             <button type="submit">Add Students</button>
           </form>
