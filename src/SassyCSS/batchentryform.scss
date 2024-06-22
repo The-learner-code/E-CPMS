@@ -1,0 +1,55 @@
+.batch {
+    display: flex;
+    width: 100%;
+
+    .batchentrycontainer {
+        flex: 6;
+
+        .form-container {
+            background-color: rgb(230, 227, 227);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+            h2 {
+                color: #16a085;
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: medium;
+                }
+
+                input,
+                textarea {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                }
+
+                textarea {
+                    resize: vertical;
+                    height: 100px;
+                }
+            }
+
+            button[type="submit"] {
+                padding: 10px 20px;
+                background-color: teal;
+                color: #fff;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+        }
+    }
+}

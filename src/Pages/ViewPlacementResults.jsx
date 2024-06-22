@@ -1,7 +1,7 @@
 import Sidebar from '../Components/sidebar/Stu_Sidebar';
 import Navbar from '../Components/navbar/Navbar';
 import Table from '../Components/tables/ViewResults';
-import '../SassyCSS/viewplacementresults.scss';
+import '../SassyCSS/placementresults.scss';
 
 const ViewPlacementResults = () => {
   return (

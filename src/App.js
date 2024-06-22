@@ -6,6 +6,10 @@ import UpdateProfile from './Pages/UpdateProfile';
 import ViewPlacementResults from './Pages/ViewPlacementResults';
 import ViewNotificationMsg from './Pages/ViewNotificationMsg';
 import ListOfStudents from './Pages/ListOfStudents';
+import BatchEntryForm from './Pages/BatchEntryForm';
+import AddPlacementResults from './Pages/AddPlacementResults';
+import MsgEntryForm from './Pages/MsgEntryForm';
+import AddNotification from './Pages/AddNotification';
 
 const App = () => {
   return (
@@ -19,6 +23,10 @@ const App = () => {
           <Route path='/ViewPlacementResults' element={<ViewPlacementResults />} />
           <Route path='/ViewNotificationMsg' element={<ViewNotificationMsg />} />
           <Route path='/ListOfStudents' element={<ListOfStudents />} />
+          <Route path='/BatchEntryForm' element={<BatchEntryForm />} />
+          <Route path='/AddPlacementResults' element={<AddPlacementResults />} />
+          <Route path='/MsgEntryForm' element={<MsgEntryForm />} />
+          <Route path='/AddNotification' element={<AddNotification />} />
         </Routes>
       </BrowserRouter>
     </div>

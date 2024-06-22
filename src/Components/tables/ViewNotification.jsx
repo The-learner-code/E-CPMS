@@ -1,7 +1,7 @@
 // Importing necessary dependencies and components from React and other libraries
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore'; // Importing Firestore functions for data retrieval
-import { db } from '../../firebase';  // Importing the configured Firestore instance
+import { db } from '../../firebase'; // Importing the configured Firestore instance
 import { DataGrid } from '@mui/x-data-grid'; // Importing the DataGrid component for table display
 import '../../SassyCSS/table.scss'; // Importing custom CSS for styling the table
 
@@ -17,16 +17,24 @@ const Tablenotify = () => {
         // Function to fetch notifications from Firestore
         const fetchNotifications = async () => {
             try {
-                // Get documents from 'Notification_Log' collection
-                const querySnapshot = await getDocs(collection(db, 'Notification_Log'));
+                // Get documents from 'Notification' collection
+                const querySnapshot = await getDocs(collection(db, 'Notification_Logs'));
                 const notificationsList = [];
                 // Iterate over each document and extract data
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     // Use timestamp field directly as a string, default to 'No timestamp available' if not present
                     const timestamp = data.timestamp ? data.timestamp : 'No timestamp available';
-                    // Push the notification data to the list
-                    notificationsList.push({ id: doc.id, type: data.type, content: data.content, timestamp });
+                    // Push the notification data to the list, ensuring all fields are included
+                    notificationsList.push({
+                        id: doc.id,
+                        type: data.type,
+                        content: data.content,
+                        timestamp,
+                        valid_from: data.valid_from,
+                        valid_to: data.valid_to,
+                        link: data.link
+                    });
                 });
                 // Update state with the fetched notifications
                 setNotifications(notificationsList);
@@ -56,7 +64,13 @@ const Tablenotify = () => {
         },
         { field: 'valid_from', headerName: 'Valid From', width: 150 },
         { field: 'valid_to', headerName: 'Valid To', width: 150 },
-        { field: 'link', headerName: 'Link', width: 200 },
+        {
+            field: 'link', headerName: 'Link', width: 200, renderCell: (params) => (
+                <a href={params.value} target="_blank" rel="noopener noreferrer">
+                    Link
+                </a>
+            )
+        },
     ];
 
     return (
@@ -80,4 +94,3 @@ const Tablenotify = () => {
 };
 
 export default Tablenotify;
-

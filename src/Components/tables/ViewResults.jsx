@@ -7,8 +7,8 @@ import '../../SassyCSS/table.scss'; // Importing custom CSS for styling the tabl
 
 // Function to fetch placement data from Firestore
 const fetchPlacementData = async () => {
-  // Get documents from 'students' collection
-  const querySnapshot = await getDocs(collection(db, 'students'));
+  // Get documents from 'PlacedStudents' collection
+  const querySnapshot = await getDocs(collection(db, 'PlacedStudents'));
   // Map the documents to an array of data objects
   const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   return data;
@@ -34,12 +34,9 @@ const ViewResults = () => {
   // Define columns for the DataGrid
   const columns = [
     { field: 'email', headerName: 'Email', width: 250 },
-    { field: 'department', headerName: 'Department', width: 200 },
-    { field: 'company_name', headerName: 'Company', width: 200 },
+    { field: 'department', headerName: 'Department', width: 300 },
+    { field: 'company_name', headerName: 'Company', width: 300 },
     { field: 'job_role', headerName: 'Job Role', width: 200 },
-    { field: 'valid_from', headerName: 'Valid From', width: 150 },
-    { field: 'valid_to', headerName: 'Valid To', width: 150 },
-    { field: 'link', headerName: 'Link', width: 200 },
   ];
 
   return (
@@ -54,7 +51,6 @@ const ViewResults = () => {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[10, 25, 50]}
           pagination
-          paginationModel={{ pageSize, page: 0 }}
         />
       </div>
     </div>
