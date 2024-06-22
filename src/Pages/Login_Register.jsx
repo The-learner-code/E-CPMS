@@ -25,7 +25,8 @@ function Login_Register() {
         setLpass(""); // Reset login password
     };
 
-    const validateEmail = (email) => /^[0-9]+@(gmail\.com|gmail\.com)$/.test(String(email).toLowerCase()); // Validate email format
+    // Validate email format to include formats like 123456@gmail.com and 123456staff@gmail.com
+    const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com)$/.test(String(email).toLowerCase());
 
     const handleRegister = async (e) => {
         e.preventDefault(); // Prevent default form submission
@@ -97,7 +98,7 @@ function Login_Register() {
                 if (trimmedEmail === "ecpms@gmail.com") { // Check if user is admin
                     navigate('/UserCred'); // Navigate to admin page
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
-                    navigate('/ListOfStudent'); // Navigate to staff page
+                    navigate('/ListOfStudents'); // Navigate to staff page
                 } else {
                     navigate('/ViewProfile'); // Navigate to profile page
                 }

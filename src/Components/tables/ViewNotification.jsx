@@ -1,8 +1,8 @@
 // Importing necessary dependencies and components from React and other libraries
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { DataGrid } from '@mui/x-data-grid';
+import { collection, getDocs } from 'firebase/firestore'; // Importing Firestore functions for data retrieval
+import { db } from '../../firebase';  // Importing the configured Firestore instance
+import { DataGrid } from '@mui/x-data-grid'; // Importing the DataGrid component for table display
 import '../../SassyCSS/table.scss'; // Importing custom CSS for styling the table
 
 const Tablenotify = () => {

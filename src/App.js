@@ -5,6 +5,7 @@ import ViewProfile from './Pages/ViewProfile';
 import UpdateProfile from './Pages/UpdateProfile';
 import ViewPlacementResults from './Pages/ViewPlacementResults';
 import ViewNotificationMsg from './Pages/ViewNotificationMsg';
+import ListOfStudents from './Pages/ListOfStudents';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/UpdateProfile' element={<UpdateProfile />} />
           <Route path='/ViewPlacementResults' element={<ViewPlacementResults />} />
           <Route path='/ViewNotificationMsg' element={<ViewNotificationMsg />} />
+          <Route path='/ListOfStudents' element={<ListOfStudents />} />
         </Routes>
       </BrowserRouter>
     </div>

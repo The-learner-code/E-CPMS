@@ -34,17 +34,17 @@ const Stu_Sidebar = () => {  // Define Stu_Sidebar functional component
             <hr />  {/* Render horizontal line */}
             <div className="center">  {/* Render center section of sidebar */}
                 <ul>  {/* Render unordered list */}
-                    <li onClick={() => navigate('/ViewProfile')}>  {/* Render list item for profile page with click event to navigate */}
+                    <li onClick={() => navigate('/ListOfStudents')}>  {/* Render list item for Student Details with click event to navigate */}
                         <AccountBoxIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
-                        <span>Profile</span>  {/* Render text 'Profile' */}
+                        <span>Student Details</span>  {/* Render text 'Student Details' */}
                     </li>
-                    <li onClick={() => navigate('/ViewPlacementResults')}>  {/* Render list item for placement result page with click event to navigate */}
+                    <li onClick={() => navigate('/')}>  {/* Render list item for placement result page with click event to navigate */}
                         <AssignmentTurnedInIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
-                        <span>Placement Result</span>  {/* Render text 'Placement Result' */} 
+                        <span>Update Result</span>  {/* Render text 'Update Result' */} 
                     </li>
-                    <li onClick={() => navigate('/ViewNotificationMsg')}>  {/* Render list item for notification page with click event to navigate */}
+                    <li onClick={() => navigate('/')}>  {/* Render list item for notification page with click event to navigate */}
                         <NotificationsIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
-                        <span>Notifications</span>  {/* Render text 'Notifications' */}
+                        <span>Update Message</span>  {/* Render text 'Update Notifications' */}
                     </li>
                 </ul>
             </div>

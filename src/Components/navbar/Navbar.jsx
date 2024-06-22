@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";  // Importing React and necessary hooks from React library
 import { auth } from "../../firebase";  // Importing the 'auth' object from the 'firebase' module
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";  // Importing an icon component from Material-UI
-import "./navbar.scss";  // Importing styles for the Navbar component
+import "../../SassyCSS/navbar.scss";  // Importing styles for the Navbar component
 
 const Navbar = () => {  // Defining the functional component Navbar
     const [email, setEmail] = useState("");  // Using the useState hook to manage state for email
