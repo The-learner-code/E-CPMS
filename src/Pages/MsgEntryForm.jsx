@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-import { db } from '../firebase';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from '../Components/sidebar/Staff_Sidebar';
-import Navbar from '../Components/navbar/Navbar';
-import '../SassyCSS/msgentryform.scss';
+import { doc, setDoc } from 'firebase/firestore'; // Import Firestore functions for document operations
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
+import { db } from '../firebase'; // Import Firebase Firestore instance
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS for notifications
+import Sidebar from '../Components/sidebar/Staff_Sidebar'; // Import Sidebar component
+import Navbar from '../Components/navbar/Navbar'; // Import Navbar component
+import '../SassyCSS/msgentryform.scss'; // Import custom Sassy CSS styles for MsgEntryForm
 
 const MsgEntryForm = () => {
-    const [type, setType] = useState('');
-    const [content, setContent] = useState('');
-    const [validFrom, setValidFrom] = useState('');
-    const [validTo, setValidTo] = useState('');
-    const [link, setLink] = useState('');
-    const navigate = useNavigate();
+    const [type, setType] = useState(''); // State for notification type
+    const [content, setContent] = useState(''); // State for notification content
+    const [validFrom, setValidFrom] = useState(''); // State for notification valid from date
+    const [validTo, setValidTo] = useState(''); // State for notification valid to date
+    const [link, setLink] = useState(''); // State for notification link
+    const navigate = useNavigate(); // Initialize navigate function from react-router-dom
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
 
         // Get current date and time in IST
         const now = new Date();
@@ -37,26 +37,26 @@ const MsgEntryForm = () => {
                 timestamp // Add timestamp as a field in the document
             });
 
-            toast.success('Notification added successfully');
-            setType('');
-            setContent('');
-            setValidFrom('');
-            setValidTo('');
-            setLink('');
+            toast.success('Notification added successfully'); // Success toast notification
+            setType(''); // Clear the type input field
+            setContent(''); // Clear the content input field
+            setValidFrom(''); // Clear the valid from date input field
+            setValidTo(''); // Clear the valid to date input field
+            setLink(''); // Clear the link input field
             setTimeout(() => {
-                navigate('/AddNotification');
+                navigate('/AddNotification'); // Navigate to AddNotification page after 2 seconds
             }, 2000);
         } catch (error) {
-            console.error("Error adding notification: ", error);
-            toast.error('Failed to add notification');
+            console.error("Error adding notification: ", error); // Log error to console
+            toast.error('Failed to add notification'); // Error toast notification
         }
     };
 
     return (
         <div className='add'>
-            <Sidebar />
+            <Sidebar /> {/* Render Sidebar component */}
             <div className="addnotifycontainer">
-                <Navbar />
+                <Navbar /> {/* Render Navbar component */}
                 <div className="form-container">
                     <h2>Add Notification</h2>
                     <form onSubmit={handleSubmit} autoComplete='off'>
@@ -109,13 +109,13 @@ const MsgEntryForm = () => {
                                 required
                             />
                         </div>
-                        <button type="submit">Add Notification</button>
+                        <button type="submit">Add Notification</button> {/* Submit button */}
                     </form>
                 </div>
             </div>
-            <ToastContainer />
+            <ToastContainer /> {/* Toast container for notifications */}
         </div>
     );
 };
 
-export default MsgEntryForm;
+export default MsgEntryForm; // Export the MsgEntryForm component as the default export

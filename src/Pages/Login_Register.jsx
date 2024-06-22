@@ -1,13 +1,30 @@
-import React, { useState } from "react"; // Import React and useState hook
-import * as Components from '../SassyCSS/stylescomp'; // Import styled components
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"; // Import Firebase authentication functions
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast for notifications
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
-import { auth, db } from '../firebase'; // Import Firebase auth and Firestore database
-import { doc, setDoc, updateDoc } from "firebase/firestore"; // Import Firestore functions
+// Import React and useState hook for state management
+import React, { useState } from "react";
 
+// Import styled components from '../SassyCSS/stylescomp'
+import * as Components from '../SassyCSS/stylescomp';
+
+// Import useNavigate hook from react-router-dom for navigation
+import { useNavigate } from 'react-router-dom';
+
+// Import Firebase authentication functions
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+
+// Import ToastContainer and toast for notifications
+import { ToastContainer, toast } from 'react-toastify';
+
+// Import Toastify CSS for styling notifications
+import 'react-toastify/dist/ReactToastify.css';
+
+// Import Firebase auth and Firestore database
+import { auth, db } from '../firebase';
+
+// Import Firestore functions for interacting with Firestore
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+
+// Define the Login_Register functional component
 function Login_Register() {
+    // State variables for registration and login form inputs
     const [signIn, toggle] = useState(true); // State to toggle between sign in and register
     const [remail, setRemail] = useState(""); // State for register email
     const [rpass, setRpass] = useState(""); // State for register password
@@ -15,8 +32,9 @@ function Login_Register() {
     const [lemail, setLemail] = useState(""); // State for login email
     const [lpass, setLpass] = useState(""); // State for login password
 
-    const navigate = useNavigate(); // Initialize navigate function
+    const navigate = useNavigate(); // Initialize navigate function for routing
 
+    // Function to reset all form inputs
     const resetForm = () => {
         setRemail(""); // Reset register email
         setRpass(""); // Reset register password
@@ -25,9 +43,10 @@ function Login_Register() {
         setLpass(""); // Reset login password
     };
 
-    // Validate email format to include formats like 123456@gmail.com and 123456staff@gmail.com
+    // Function to validate email format
     const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com)$/.test(String(email).toLowerCase());
 
+    // Function to handle registration process
     const handleRegister = async (e) => {
         e.preventDefault(); // Prevent default form submission
 
@@ -35,21 +54,28 @@ function Login_Register() {
         const trimmedPass = rpass.trim(); // Trim register password
         const trimmedConPass = rconpass.trim(); // Trim register confirm password
 
+        // Validate email format
         if (!validateEmail(trimmedEmail)) {
             toast.error("Please enter a valid Email_id...! Should be '123@gmail.com' Only.", { autoClose: 2500 });
             resetForm();
             return;
         }
+
+        // Validate password length
         if (trimmedPass.length < 6) {
             toast.error("Password should not be less than 6 characters...!", { autoClose: 2500 });
             resetForm();
             return;
         }
+
+        // Validate confirm password length
         if (trimmedConPass.length < 6) {
             toast.error("Confirm Password should not be less than 6 characters...!", { autoClose: 2500 });
             resetForm();
             return;
         }
+
+        // Validate if passwords match
         if (trimmedPass !== trimmedConPass) {
             toast.error("Password and Confirm Password do not match...!", { autoClose: 2500 });
             resetForm();
@@ -72,14 +98,15 @@ function Login_Register() {
             toast.success(`${user.email} Registered Successfully, Please Login...!`, { autoClose: 2500 });
             setTimeout(() => {
                 toggle(true); // Toggle to sign-in view
-                resetForm(); // Reset form
+                resetForm(); // Reset form inputs
             }, 2000);
         } catch (error) {
             toast.error(`Registration Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
-            resetForm();
+            resetForm(); // Reset form inputs on error
         }
     };
 
+    // Function to handle login process
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission
         const trimmedEmail = lemail.trim(); // Trim login email
@@ -90,7 +117,7 @@ function Login_Register() {
             const user = userCredential.user; // Get user data
 
             await updateDoc(doc(db, "AuthDetails", user.uid), {
-                signedIn: user.metadata.lastSignInTime // Update last sign-in time
+                signedIn: user.metadata.lastSignInTime // Update last sign-in time in Firestore
             });
 
             toast.success("Logged in Successfully...!", { autoClose: 2500 });
@@ -100,89 +127,130 @@ function Login_Register() {
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
                     navigate('/ListOfStudents'); // Navigate to staff page
                 } else {
-                    navigate('/ViewProfile'); // Navigate to profile page
+                    navigate('/ViewProfile'); // Navigate to profile page for students
                 }
             }, 2000);
         } catch (error) {
             toast.error(`Login Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
-            resetForm();
+            resetForm(); // Reset form inputs on error
         }
     };
 
+    // Function to handle forgot password process
     const handleForgotPassword = async (e) => {
         e.preventDefault(); // Prevent default form submission
         const trimmedEmail = lemail.trim(); // Trim login email
 
         if (!trimmedEmail) {
             toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
-            resetForm();
+            resetForm(); // Reset form inputs
             return;
         }
 
         try {
             await sendPasswordResetEmail(auth, trimmedEmail); // Send password reset email
             toast.success("Password reset email sent successfully.", { autoClose: 2500 });
-            resetForm();
+            resetForm(); // Reset form inputs
         } catch (error) {
             toast.error(`Error sending password reset email: ${error.message}`, { autoClose: 2500 });
-            resetForm();
+            resetForm(); // Reset form inputs on error
         }
     };
 
+    // Return JSX for Login_Register component
     return (
         <Components.Body>
-            <Components.BackButton onClick={() => navigate('/')}>Back to Home</Components.BackButton> {/* Back to home button */}
-            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover /> {/* Toast container */}
+            {/* Back to home button */}
+            <Components.BackButton onClick={() => navigate('/')}>Back to Home</Components.BackButton>
+            
+            {/* Toast container for displaying notifications */}
+            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            
+            {/* Container for login and registration forms */}
             <Components.Container>
+                {/* Sign up container */}
                 <Components.SignUpContainer signinIn={signIn}>
-                    <Components.Form onSubmit={handleRegister}> {/* Register form */}
+                    {/* Register form */}
+                    <Components.Form onSubmit={handleRegister}>
+                        {/* Register form title */}
                         <Components.Title>Get Onboard</Components.Title>
-                        <Components.Input type='email' placeholder='Enter Email Id' value={remail} onChange={(e) => setRemail(e.target.value)} required /> {/* Register email input */}
-                        <Components.Input type='password' placeholder='Enter Password' value={rpass} onChange={(e) => setRpass(e.target.value)} required /> {/* Register password input */}
-                        <Components.Input type='password' placeholder='Confirm Password' value={rconpass} onChange={(e) => setRconpass(e.target.value)} required /> {/* Register confirm password input */}
-                        <Components.Button type="submit">Register Today</Components.Button> {/* Register button */}
+                        
+                        {/* Register email input */}
+                        <Components.Input type='email' placeholder='Enter Email Id' value={remail} onChange={(e) => setRemail(e.target.value)} required />
+                        
+                        {/* Register password input */}
+                        <Components.Input type='password' placeholder='Enter Password' value={rpass} onChange={(e) => setRpass(e.target.value)} required />
+                        
+                        {/* Register confirm password input */}
+                        <Components.Input type='password' placeholder='Confirm Password' value={rconpass} onChange={(e) => setRconpass(e.target.value)} required />
+                        
+                        {/* Register button */}
+                        <Components.Button type="submit">Register Today</Components.Button>
                     </Components.Form>
                 </Components.SignUpContainer>
 
+                {/* Sign in container */}
                 <Components.SignInContainer signinIn={signIn}>
-                    <Components.Form onSubmit={handleLogin}> {/* Login form */}
+                    {/* Login form */}
+                    <Components.Form onSubmit={handleLogin}>
+                        {/* Login form title */}
                         <Components.Title>Authenticate</Components.Title>
-                        <Components.Input type='email' placeholder='Enter Email Id' value={lemail} onChange={(e) => setLemail(e.target.value)} required /> {/* Login email input */}
-                        <Components.Input type='password' placeholder='Enter Password' value={lpass} onChange={(e) => setLpass(e.target.value)} required /> {/* Login password input */}
-                        <Components.Anchor href='#' onClick={handleForgotPassword}>Forgot your password...!</Components.Anchor> {/* Forgot password link */}
-                        <Components.Button type="submit">LogIn</Components.Button> {/* Login button */}
+                        
+                        {/* Login email input */}
+                        <Components.Input type='email' placeholder='Enter Email Id' value={lemail} onChange={(e) => setLemail(e.target.value)} required />
+                        
+                        {/* Login password input */}
+                        <Components.Input type='password' placeholder='Enter Password' value={lpass} onChange={(e) => setLpass(e.target.value)} required />
+                        
+                        {/* Forgot password link */}
+                        <Components.Anchor href='#' onClick={handleForgotPassword}>Forgot your password...!</Components.Anchor>
+                        
+                        {/* Login button */}
+                        <Components.Button type="submit">LogIn</Components.Button>
                     </Components.Form>
                 </Components.SignInContainer>
 
+                {/* Overlay container for sign in and register toggle */}
                 <Components.OverlayContainer signinIn={signIn}>
+                    {/* Overlay content */}
                     <Components.Overlay signinIn={signIn}>
+                        {/* Left overlay panel */}
                         <Components.LeftOverlayPanel signinIn={signIn}>
-                            <Components.Title>Unlock Your Potential!</Components.Title> {/* Overlay title */}
+                            {/* Overlay title */}
+                            <Components.Title>Unlock Your Potential!</Components.Title>
+                            
+                            {/* Overlay paragraph */}
                             <Components.Paragraph>
                                 Dive into a world of opportunities. Sign in with your credentials to explore your future.
                             </Components.Paragraph>
+                            
+                            {/* Ghost button to toggle to login */}
                             <Components.GhostButton onClick={() => toggle(true)}>
                                 Log In
                             </Components.GhostButton>
                         </Components.LeftOverlayPanel>
 
+                        {/* Right overlay panel */}
                         <Components.RightOverlayPanel signinIn={signIn}>
-                            <Components.Title>Join the Journey!</Components.Title> {/* Overlay title */}
+                            {/* Overlay title */}
+                            <Components.Title>Join the Journey!</Components.Title>
+                            
+                            {/* Overlay paragraph */}
                             <Components.Paragraph>
                                 Embark on an adventure of learning and growth. Provide your personal details and let's begin.
                             </Components.Paragraph>
+                            
+                            {/* Ghost button to toggle to register */}
                             <Components.GhostButton onClick={() => toggle(false)}>
                                 Register Here
                             </Components.GhostButton>
                         </Components.RightOverlayPanel>
-
                     </Components.Overlay>
-
                 </Components.OverlayContainer>
-
             </Components.Container>
         </Components.Body>
     );
 }
 
-export default Login_Register; // Export the Login_Register component
+// Export the Login_Register component as the default export
+export default Login_Register;

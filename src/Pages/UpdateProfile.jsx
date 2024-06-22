@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { auth, db, storage } from "../firebase";
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import Navbar from "../Components/navbar/Navbar";
-import Sidebar from "../Components/sidebar/Stu_Sidebar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import "../SassyCSS/updateprofile.scss";
+import { auth, db, storage } from "../firebase"; // Firebase imports
+import { setDoc, doc, getDoc } from "firebase/firestore"; // Firestore imports
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Storage imports
+import { ToastContainer, toast } from 'react-toastify'; // Toast notifications
+import { useNavigate } from 'react-router-dom'; // React Router navigation
+import Navbar from "../Components/navbar/Navbar"; // Navbar component
+import Sidebar from "../Components/sidebar/Stu_Sidebar"; // Sidebar component
+import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined"; // Material-UI icon
+import "../SassyCSS/updateprofile.scss"; // Custom CSS styles
 
 const UpdateProfile = () => {
     const navigate = useNavigate();
-    const [file, setFile] = useState("");
-    const [emailid, setEmailid] = useState(auth.currentUser?.email || "");
-    const [name, setName] = useState("");
-    const [registerno, setRegisterno] = useState("");
-    const [batch, setBatch] = useState("");
-    const [dep, setDep] = useState("");
-    const [sem, setSem] = useState("");
-    const [cgpa, setCGPA] = useState("");
-    const [placementStatus, setPlacementStatus] = useState("");
-    const [address, setAddress] = useState("");
-    const [dis, setDis] = useState("");
-    const [state, setState] = useState("");
-    const [phone, setPhone] = useState("");
-    const [pin, setPin] = useState("");
-    const [photo, setPhoto] = useState(null);
-    const [photoURL, setPhotoURL] = useState("");
-    const [resume, setResume] = useState(null);
-    const [resumeURL, setResumeURL] = useState("");
+    const [file, setFile] = useState(""); // State for uploaded file (image)
+    const [emailid, setEmailid] = useState(auth.currentUser?.email || ""); // State for user's email
+    const [name, setName] = useState(""); // State for user's name
+    const [registerno, setRegisterno] = useState(""); // State for user's registration number
+    const [batch, setBatch] = useState(""); // State for user's batch
+    const [dep, setDep] = useState(""); // State for user's department
+    const [sem, setSem] = useState(""); // State for user's current semester
+    const [cgpa, setCGPA] = useState(""); // State for user's current CGPA
+    const [placementStatus, setPlacementStatus] = useState(""); // State for user's placement status
+    const [address, setAddress] = useState(""); // State for user's address
+    const [dis, setDis] = useState(""); // State for user's district
+    const [state, setState] = useState(""); // State for user's state
+    const [phone, setPhone] = useState(""); // State for user's phone number
+    const [pin, setPin] = useState(""); // State for user's pincode
+    const [photo, setPhoto] = useState(null); // State for uploaded photo
+    const [photoURL, setPhotoURL] = useState(""); // State for photo URL
+    const [resume, setResume] = useState(null); // State for uploaded resume
+    const [resumeURL, setResumeURL] = useState(""); // State for resume URL
 
+    // Effect to set email id if user is logged in
     useEffect(() => {
         const user = auth.currentUser;
         if (user) {
@@ -42,6 +43,7 @@ const UpdateProfile = () => {
         }
     }, [navigate]);
 
+    // Effect to fetch user data from Firestore
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -50,6 +52,7 @@ const UpdateProfile = () => {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     const data = docSnap.data();
+                    // Setting user data from Firestore to component state
                     setName(data.Name || "");
                     setRegisterno(data.Register_No || "");
                     setEmailid(data.Email_id || user.email);
@@ -74,6 +77,7 @@ const UpdateProfile = () => {
         fetchData();
     }, []);
 
+    // Function to reset form fields
     const resetForm = () => {
         setName("");
         setRegisterno("");
@@ -94,8 +98,10 @@ const UpdateProfile = () => {
         setResumeURL("");
     };
 
+    // Function to validate email format
     const validateEmail = (emailid) => /^[0-9]+@(sastra\.ac\.in|gmail\.com)$/.test(String(emailid).toLowerCase());
 
+    // Function to handle photo upload to Firebase Storage
     const handlePhotoUpload = async () => {
         if (!photo) return photoURL;
         const photoRef = ref(storage, `user_photos/${auth.currentUser.uid}/${photo.name}`);
@@ -103,6 +109,7 @@ const UpdateProfile = () => {
         return await getDownloadURL(photoRef);
     };
 
+    // Function to handle resume upload to Firebase Storage
     const handleResumeUpload = async () => {
         if (!resume) return resumeURL;
         if (resume.type !== "application/pdf") {
@@ -114,12 +121,14 @@ const UpdateProfile = () => {
         return await getDownloadURL(resumeRef);
     };
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const user = auth.currentUser;
         const emailPrefix = user.email.split('@')[0];
 
+        // Validation checks
         if (!validateEmail(emailid.trim())) {
             toast.error("Please enter a valid Email_id...!");
             return;
@@ -174,12 +183,14 @@ const UpdateProfile = () => {
         }
 
         try {
+            // Upload photo and resume to Storage
             const uploadedPhotoURL = await handlePhotoUpload();
             const uploadedResumeURL = await handleResumeUpload();
             if (!uploadedResumeURL) {
                 return;
             }
 
+            // Update user data in Firestore
             const docRef = doc(db, "StudentsInformation", user.email);
             await setDoc(docRef, {
                 Name: name,
@@ -198,10 +209,14 @@ const UpdateProfile = () => {
                 Photo_URL: uploadedPhotoURL,
                 Resume_URL: uploadedResumeURL
             });
+
+            // Success message and navigation
             toast.success(`${user.email} Profile updated successfully!`);
             setTimeout(() => {
                 navigate('/ViewProfile');
             }, 2000);
+
+            // Reset form fields
             resetForm();
         } catch (error) {
             toast.error(`Profile updation Unsuccessful. Error code: ${error.message}`);
@@ -210,15 +225,23 @@ const UpdateProfile = () => {
 
     return (
         <div className="new">
+            {/* Toast notification container */}
             <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+
+            {/* Sidebar component */}
             <Sidebar />
+
             <div className="newcontainer">
+                {/* Navbar component */}
                 <Navbar />
+
                 <div className="top">
                     <h1>Update your profile...!</h1>
                 </div>
+
                 <div className="bottom">
                     <div className="left">
+                        {/* Display uploaded photo or default image */}
                         <img
                             src={
                                 file
@@ -228,72 +251,93 @@ const UpdateProfile = () => {
                             alt=""
                         />
                     </div>
+
                     <div className="right">
+                        {/* Form for updating user profile */}
                         <form onSubmit={handleSubmit} autoComplete="off">
                             <div className="forminput">
                                 <label htmlFor="file">
                                     Image :<DriveFolderUploadOutlinedIcon className="icon" />
                                 </label>
+                                {/* Input for uploading image */}
                                 <input type="file" accept="image/*" onChange={(e) => { setPhoto(e.target.files[0]); setFile(e.target.files[0]); }} id="file" style={{ display: "none" }} />
                             </div>
+
                             <div className="forminput">
                                 <label htmlFor="resume">
                                     Upload Your Resume (PDF) :<DriveFolderUploadOutlinedIcon className="icon" />
                                 </label>
+                                {/* Input for uploading resume */}
                                 <input type="file" accept="application/pdf" onChange={(e) => setResume(e.target.files[0])} id="resume" style={{ display: "none" }} />
                             </div>
+
+                            {/* Input fields for user profile information */}
                             <div className="forminput">
                                 <label>Email ID :</label>
                                 <input type="text" value={emailid} onChange={(e) => setEmailid(e.target.value)} readOnly />
                             </div>
+
                             <div className="forminput">
                                 <label>Name :</label>
                                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Register No :</label>
                                 <input type="text" value={registerno} onChange={(e) => setRegisterno(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Batch :</label>
                                 <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Department :</label>
                                 <input type="text" value={dep} onChange={(e) => setDep(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Current Semester :</label>
                                 <input type="text" value={sem} onChange={(e) => setSem(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Current CGPA :</label>
                                 <input type="text" value={cgpa} onChange={(e) => setCGPA(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Placement Status :</label>
                                 <input type="text" value={placementStatus} onChange={(e) => setPlacementStatus(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Address :</label>
                                 <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>District :</label>
                                 <input type="text" value={dis} onChange={(e) => setDis(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>State :</label>
                                 <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Phone Number :</label>
                                 <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
                             </div>
+
                             <div className="forminput">
                                 <label>Pincode :</label>
                                 <input type="text" value={pin} onChange={(e) => setPin(e.target.value)} />
                             </div>
+
+                            {/* Submit button */}
                             <button type="submit">Update</button>
                         </form>
                     </div>
@@ -304,3 +348,4 @@ const UpdateProfile = () => {
 };
 
 export default UpdateProfile;
+

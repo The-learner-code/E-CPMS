@@ -12,30 +12,34 @@ const ViewProfile = () => {  // Define ViewProfile functional component
   const navigate = useNavigate();  // Initialize navigate function from React Router
   const [profileData, setProfileData] = useState(null);  // Initialize state for profile data
 
-   useEffect(() => {
-      const fetchProfileData = async () => {
-          const user = auth.currentUser;
-          if (user) {
-              const docRef = doc(db, "StudentsInformation", user.email);
-              const docSnap = await getDoc(docRef);
-              if (docSnap.exists()) {
-                  setProfileData(docSnap.data());
-              } else {
-                  toast.warn("No data found. Redirecting to update profile page...");
-                  setTimeout(() => {
-                      navigate('/UpdateProfile');
-                  }, 3000);
-              }
-          } else {
-              toast.error("Not a valid user");
-              setTimeout(() => {
-                  navigate('/LoginAndRegister');
-              }, 3000);
-          }
-      };
+  useEffect(() => {
+    // Fetch profile data from Firestore on component mount
+    const fetchProfileData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const docRef = doc(db, "StudentsInformation", user.email);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          // Set profileData state with fetched document data
+          setProfileData(docSnap.data());
+        } else {
+          // Notify user and redirect if no data found
+          toast.warn("No data found. Redirecting to update profile page...");
+          setTimeout(() => {
+            navigate('/UpdateProfile');
+          }, 3000);
+        }
+      } else {
+        // Notify if user is not valid and redirect to login/register page
+        toast.error("Not a valid user");
+        setTimeout(() => {
+          navigate('/LoginAndRegister');
+        }, 3000);
+      }
+    };
 
-      fetchProfileData();
-  }, [navigate]); 
+    fetchProfileData();  // Call fetchProfileData function
+  }, [navigate]);  // Dependency array for useEffect to run only once
 
   return (
     <div className='profile'>

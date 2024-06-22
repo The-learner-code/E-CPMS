@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { db } from '../../firebase';
-import { collection, getDocs } from 'firebase/firestore';
-import '../../SassyCSS/table.scss';
+import React, { useState, useEffect } from 'react';  // Import React, useState, and useEffect from React library
+import { DataGrid } from '@mui/x-data-grid';  // Import DataGrid component from Material-UI X package
+import { db } from '../../firebase';  // Import db from Firebase
+import { collection, getDocs } from 'firebase/firestore';  // Import collection and getDocs from Firestore
+import '../../SassyCSS/table.scss';  // Import custom CSS styles for table
 
+// Function to fetch placement data from Firestore
 const fetchPlacementData = async () => {
-    const querySnapshot = await getDocs(collection(db, 'PlacedStudents'));
-    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    return data;
+    const querySnapshot = await getDocs(collection(db, 'PlacedStudents'));  // Query 'PlacedStudents' collection
+    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));  // Map query snapshot to array of objects
+    return data;  // Return formatted data
 };
 
 const PlacementResults = () => {
-    const [placementData, setPlacementData] = useState([]);
-    const [pageSize, setPageSize] = useState(10);
+    const [placementData, setPlacementData] = useState([]);  // State for placement data
+    const [pageSize, setPageSize] = useState(10);  // State for page size in DataGrid pagination
 
     useEffect(() => {
         const getData = async () => {
-            const data = await fetchPlacementData();
-            setPlacementData(data);
+            const data = await fetchPlacementData();  // Fetch placement data
+            setPlacementData(data);  // Set placement data in state
         };
-        getData();
-    }, []);
+        getData();  // Call getData function on component mount
+    }, []);  // Empty dependency array ensures useEffect runs only once
 
+    // Define columns for DataGrid component
     const columns = [
         { field: 'email', headerName: 'Email', width: 250 },
         { field: 'department', headerName: 'Department', width: 300 },
@@ -32,6 +34,7 @@ const PlacementResults = () => {
     return (
         <div className="table-container">
             <div style={{ height: 480, width: '100%' }}>
+                {/* Render DataGrid with placementData and columns */}
                 <DataGrid
                     rows={placementData}
                     columns={columns}
@@ -45,4 +48,4 @@ const PlacementResults = () => {
     );
 };
 
-export default PlacementResults;
+export default PlacementResults;  // Export PlacementResults component as default
