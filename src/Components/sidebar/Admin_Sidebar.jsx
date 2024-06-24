@@ -32,13 +32,13 @@ const Admin_Sidebar = () => {  // Define Admin_Sidebar functional component
             <hr />  {/* Render horizontal line */}
             <div className="center">  {/* Render center section of sidebar */}
                 <ul>  {/* Render unordered list */}
-                    <li onClick={() => navigate('/ListOfUsers')}>  {/* Render list item for User Details with click event to navigate */}
+                    <li onClick={() => navigate('/ListOfUsers')}>  {/* Render list item for ListOfUsers with click event to navigate */}
                         <AccountBoxIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
                         <span>User Details</span>  {/* Render text 'User Details' */}
                     </li>
-                    <li onClick={() => navigate('/')}>  {/* Render list item for placement result page with click event to navigate */}
+                    <li onClick={() => navigate('/TechSupport')}>  {/* Render list item for TechSupport page with click event to navigate */}
                         <SupportIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
-                        <span>Tech Support</span>  {/* Render text 'Update Result' */} 
+                        <span>Tech Support</span>  {/* Render text 'Tech Support' */} 
                     </li>
                 </ul>
             </div>

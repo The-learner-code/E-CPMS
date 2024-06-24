@@ -13,12 +13,13 @@ const fetchPlacementData = async () => {
 
 const PlacementResults = () => {
     const [placementData, setPlacementData] = useState([]);  // State for placement data
-    const [pageSize, setPageSize] = useState(10);  // State for page size in DataGrid pagination
+    const [loading, setLoading] = useState(true);  // State for loading status
 
     useEffect(() => {
         const getData = async () => {
             const data = await fetchPlacementData();  // Fetch placement data
-            setPlacementData(data);  // Set placement data in state
+            setPlacementData(data);
+            setLoading(false);  // Set placement data in state
         };
         getData();  // Call getData function on component mount
     }, []);  // Empty dependency array ensures useEffect runs only once
@@ -38,10 +39,13 @@ const PlacementResults = () => {
                 <DataGrid
                     rows={placementData}
                     columns={columns}
-                    pageSize={pageSize}
-                    rowsPerPageOptions={[10, 25, 50]}
-                    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-                    pagination
+                    loading={loading}
+                    initialState={{
+                        pagination: {
+                          paginationModel: { page: 0, pageSize: 5 },
+                        },
+                      }}
+                      pageSizeOptions={[5, 10]}
                 />
             </div>
         </div >

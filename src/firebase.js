@@ -1,8 +1,10 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+// Import the necessary functions from the Firebase SDKs
+import { initializeApp } from "firebase/app"; // Import to initialize the Firebase app
+import { getAuth } from "firebase/auth"; // Import to handle Firebase authentication
+import { getFirestore } from "firebase/firestore"; // Import to handle Firestore database
+import { getStorage } from "firebase/storage"; // Import to handle Firebase storage
 
+// Firebase configuration object containing the project's API key and other identifiers
 const firebaseConfig = {
   apiKey: "AIzaSyAWduwG-4QbKsjmIwx4Jyhc65NjbSFhnow",
   authDomain: "enhanced-cpm.firebaseapp.com",
@@ -15,25 +17,14 @@ const firebaseConfig = {
 // Initialize Firebase app with the provided configuration
 const firebaseApp = initializeApp(firebaseConfig);
 
-// Initialize Firebase authentication
+// Initialize Firebase authentication and get a reference to the auth service
 const auth = getAuth(firebaseApp);
 
-// Initialize Firebase Firestore (database)
+// Initialize Firebase Firestore (database) and get a reference to the database service
 const db = getFirestore(firebaseApp);
 
-// Initialize Firebase Storage
+// Initialize Firebase Storage and get a reference to the storage service
 const storage = getStorage(firebaseApp);
 
 // Export initialized Firebase app, authentication, Firestore, and storage instances
 export { firebaseApp, auth, db, storage };
-
-
-/*// Replace with your Firebase project config obtained from Firebase Console
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY", // Your Firebase API key
-  authDomain: "YOUR_AUTH_DOMAIN", // Your Firebase authentication domain
-  projectId: "YOUR_PROJECT_ID", // Your Firebase project ID
-  storageBucket: "YOUR_STORAGE_BUCKET", // Your Firebase storage bucket
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Your Firebase messaging sender ID
-  appId: "YOUR_APP_ID" // Your Firebase app ID
-};*/

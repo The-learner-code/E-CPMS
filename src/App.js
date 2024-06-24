@@ -11,6 +11,7 @@ import AddPlacementResults from './Pages/AddPlacementResults';  // Importing the
 import MsgEntryForm from './Pages/MsgEntryForm';  // Importing the MsgEntryForm component
 import AddNotification from './Pages/AddNotification';  // Importing the AddNotification component
 import ListOfUsers from './Pages/ListOfUsers'; // Importing the ListOfUsers component
+import TechSupport from './Pages/TechSupport'; // Importing the TechSupport component
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='/MsgEntryForm' element={<MsgEntryForm />} />  {/* Route for MsgEntryForm page */}
           <Route path='/AddNotification' element={<AddNotification />} />  {/* Route for AddNotification page */}
           <Route path='/ListOfUsers' element={<ListOfUsers />} /> {/* Route for ListOfUsers page */}
+          <Route path='/TechSupport' element={<TechSupport />} /> {/* Route for TechSupport page */}
         </Routes>
       </BrowserRouter>
     </div>

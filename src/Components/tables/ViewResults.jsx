@@ -17,8 +17,8 @@ const fetchPlacementData = async () => {
 const ViewResults = () => {
   // State to store the fetched placement data
   const [placementData, setPlacementData] = useState([]);
-  // State to manage the number of rows per page
-  const [pageSize, setPageSize] = useState(10);
+  // State to manage loading status
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Function to fetch and set placement data
@@ -26,6 +26,7 @@ const ViewResults = () => {
       const data = await fetchPlacementData();
       // Update state with the fetched data
       setPlacementData(data);
+      setLoading(false);
     };
     // Call the fetch function
     getData();
@@ -47,10 +48,13 @@ const ViewResults = () => {
         <DataGrid
           rows={placementData}
           columns={columns}
-          pageSize={pageSize}
-          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          rowsPerPageOptions={[10, 25, 50]}
-          pagination
+          loading={loading}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
         />
       </div>
     </div>

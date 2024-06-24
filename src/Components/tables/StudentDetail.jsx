@@ -12,8 +12,7 @@ const StudentTable = () => {
   const [students, setStudents] = useState([]);
   // State to manage loading status
   const [loading, setLoading] = useState(true);
-  // State to manage the number of rows per page
-  const [pageSize, setPageSize] = useState(10);
+
 
   useEffect(() => {
     // Function to fetch student data from Firestore
@@ -80,11 +79,13 @@ const StudentTable = () => {
           <DataGrid
             rows={students}
             columns={columns}
-            pageSize={pageSize}
-            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[10, 25, 50]}
-            pagination
-            paginationModel={{ pageSize, page: 0 }}
+            loading={loading}
+            initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
           />
         </div>
       )}
