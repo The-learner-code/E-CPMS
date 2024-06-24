@@ -1,13 +1,9 @@
 import styled from 'styled-components';
-import LR from '../Assets/Index.jpg';
 
 // Body container
 export const Body = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(0, 128, 128, 0.8), rgba(222, 184, 135, 0.7)), url(${LR});
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +18,7 @@ export const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 678px;
+  width: 750px;
   max-width: 100%;
   min-height: 400px;
 `;
@@ -91,8 +87,8 @@ export const BackButton = styled.button`
   top: 30px;
   right: 40px;
   font-size: 16px;
-  font-weight: medium;
-  background: #16a085;
+  font-weight: bold;
+    background: rgba(0, 128, 128, 0.7);
   color: #fff;
   border-radius: 20px;
   border: 0;
@@ -104,7 +100,7 @@ export const BackButton = styled.button`
 export const Button = styled.button`
   border-radius: 20px;
   border: 1px solid #89f7fe;
-  background: #16a085;
+   background: rgba(0, 128, 128, 0.7);
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -149,7 +145,7 @@ export const OverlayContainer = styled.div`
 
 // Overlay styling
 export const Overlay = styled.div`
-  background: #16a085;
+ background: rgba(0, 128, 128, 0.9);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
