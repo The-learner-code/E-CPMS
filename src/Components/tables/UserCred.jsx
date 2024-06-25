@@ -9,14 +9,6 @@ import { collection, getDocs } from 'firebase/firestore';
 // Import custom styles for the table component
 import '../../SassyCSS/table.scss';
 
-// Function to convert UTC time to IST
-const convertToIST = (utcDateString) => {
-  const utcDate = new Date(utcDateString); // Create a Date object from the UTC date string
-  const offsetIST = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds (5.5 hours)
-  const istDate = new Date(utcDate.getTime() + offsetIST); // Add the offset to the UTC date
-  return istDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }); // Format the date in IST
-};
-
 // Async function to fetch user credential data from Firestore
 const fetchUserCredData = async () => {
   const querySnapshot = await getDocs(collection(db, 'AuthDetails')); // Get all documents from the 'AuthDetails' collection
@@ -25,8 +17,10 @@ const fetchUserCredData = async () => {
     return {
       id: doc.id, // Document ID
       email: docData.email, // Email field
-      created: convertToIST(docData.created), // Convert and format the 'created' field to IST
-      signedIn: convertToIST(docData.signedIn), // Convert and format the 'signedIn' field to IST
+      //created: convertToIST(docData.created), // Convert and format the 'created' field to IST
+      //signedIn: convertToIST(docData.signedIn), // Convert and format the 'signedIn' field to IST
+      created: docData.created, // Convert and format the 'created' field to IST
+      signedIn: docData.signedIn, // Convert and format the 'signedIn' field to IST
       uid: docData.uid, // User UID field
       password: docData.password, // Password field
       type: docData.type // Type field

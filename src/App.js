@@ -12,29 +12,33 @@ import MsgEntryForm from './Pages/MsgEntryForm';  // Importing the MsgEntryForm 
 import AddNotification from './Pages/AddNotification';  // Importing the AddNotification component
 import ListOfUsers from './Pages/ListOfUsers'; // Importing the ListOfUsers component
 import TechSupport from './Pages/TechSupport'; // Importing the TechSupport component
+import { AuthProvider } from './AuthContext';
+import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   return (
     <div>
-      {/* Using BrowserRouter for setting up routing */}
-      <BrowserRouter>
-        <Routes>
-          {/* Define routes for different pages */}
-          <Route path='/' element={<Home />} />  {/* Route for Home page */}
-          <Route path='/LoginAndRegister' element={<LoginAndRegister />} />  {/* Route for LoginAndRegister page */}
-          <Route path='/ViewProfile' element={<ViewProfile />} />  {/* Route for ViewProfile page */}
-          <Route path='/UpdateProfile' element={<UpdateProfile />} />  {/* Route for UpdateProfile page */}
-          <Route path='/ViewPlacementResults' element={<ViewPlacementResults />} />  {/* Route for ViewPlacementResults page */}
-          <Route path='/ViewNotificationMsg' element={<ViewNotificationMsg />} />  {/* Route for ViewNotificationMsg page */}
-          <Route path='/ListOfStudents' element={<ListOfStudents />} />  {/* Route for ListOfStudents page */}
-          <Route path='/BatchEntryForm' element={<BatchEntryForm />} />  {/* Route for BatchEntryForm page */}
-          <Route path='/AddPlacementResults' element={<AddPlacementResults />} />  {/* Route for AddPlacementResults page */}
-          <Route path='/MsgEntryForm' element={<MsgEntryForm />} />  {/* Route for MsgEntryForm page */}
-          <Route path='/AddNotification' element={<AddNotification />} />  {/* Route for AddNotification page */}
-          <Route path='/ListOfUsers' element={<ListOfUsers />} /> {/* Route for ListOfUsers page */}
-          <Route path='/TechSupport' element={<TechSupport />} /> {/* Route for TechSupport page */}
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        {/* Using BrowserRouter for setting up routing */}
+        <BrowserRouter>
+          <Routes>
+            {/* Define routes for different pages */}
+            <Route path='/' element={<Home />} />  {/* Route for Home page */}
+            <Route path='/LoginAndRegister' element={<LoginAndRegister />} />  {/* Route for LoginAndRegister page */}
+            <Route path='/ViewProfile' element={<PrivateRoute element={<ViewProfile />} />} />  {/* Route for ViewProfile page */}
+            <Route path='/UpdateProfile' element={<PrivateRoute element={<UpdateProfile />} />} />  {/* Route for UpdateProfile page */}
+            <Route path='/ViewPlacementResults' element={<PrivateRoute element={<ViewPlacementResults />} />} />  {/* Route for ViewPlacementResults page */}
+            <Route path='/ViewNotificationMsg' element={<PrivateRoute element={<ViewNotificationMsg />} />} />  {/* Route for ViewNotificationMsg page */}
+            <Route path='/ListOfStudents' element={<PrivateRoute element={<ListOfStudents />} />} />  {/* Route for ListOfStudents page */}
+            <Route path='/BatchEntryForm' element={<PrivateRoute element={<BatchEntryForm />} />} />  {/* Route for BatchEntryForm page */}
+            <Route path='/AddPlacementResults' element={<PrivateRoute element={<AddPlacementResults />} />} />  {/* Route for AddPlacementResults page */}
+            <Route path='/MsgEntryForm' element={<PrivateRoute element={<MsgEntryForm />} />} />  {/* Route for MsgEntryForm page */}
+            <Route path='/AddNotification' element={<PrivateRoute element={<AddNotification />} />} />  {/* Route for AddNotification page */}
+            <Route path='/ListOfUsers' element={<PrivateRoute element={<ListOfUsers />} />} /> {/* Route for ListOfUsers page */}
+            <Route path='/TechSupport' element={<PrivateRoute element={<TechSupport />} />} /> {/* Route for TechSupport page */}
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

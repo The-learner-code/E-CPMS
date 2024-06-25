@@ -121,8 +121,11 @@ nav {
         position: relative;
 
         .about-img {
-            width: 100%;
+            width: 85%;
+            height: 500px;
             border-radius: 10px;
+            align-items: center;
+            justify-content: center;
         }
     }
 

@@ -19,8 +19,7 @@ const fetchTechSupportData = async () => {
     Email_id: doc.data().Email_id,  // Email ID field
     Registered_no: doc.data().Registered_no,  // Registered number field
     Message: doc.data().Message,  // Message field
-    // Convert Firestore Timestamp to Date and then format in IST
-    Timestamp: doc.data().Timestamp.toDate().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    Timestamp: doc.data().Timestamp, //timestamp field
   }));
   return data;  // Return the formatted data
 };

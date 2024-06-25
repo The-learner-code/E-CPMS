@@ -56,7 +56,15 @@ const Contacts = () => {
     
             // Format timestamp to IST (Indian Standard Time)
             const ISTDateString = new Date().toLocaleString('en-IN', {
-                timeZone: 'Asia/Kolkata'
+                timeZone: 'Asia/Kolkata',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,  // Use 12-hour clock
+                hourCycle: 'h12'  // Ensure AM/PM is included
             });
     
             await setDoc(docRef, {
@@ -74,7 +82,6 @@ const Contacts = () => {
         }
     };
     
-
     // Return the JSX for the Contacts section
     return (
         // Container for the contact section with a specific class name for styling

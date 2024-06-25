@@ -20,6 +20,9 @@ import { auth, db } from '../firebase';
 // Import Firestore functions for interacting with Firestore
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 
+//This library helps in manipulating time zones easily.
+import moment from 'moment-timezone';
+
 // Define the Login_Register functional component
 function Login_Register() {
     // State variables for registration and login form inputs
@@ -85,16 +88,20 @@ function Login_Register() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPass); // Create user with email and password
             const user = userCredential.user; // Get user data
+
+            // Convert creation and last sign-in times to IST
+            const createdIST = moment(user.metadata.creationTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
+            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
+
             const userData = {
                 email: user.email, // User email
-                created: user.metadata.creationTime, // User account creation time
-                signedIn: user.metadata.lastSignInTime, // Last sign-in time
+                created: createdIST, // User account creation time in IST
+                signedIn: signedInIST, // Last sign-in time in IST
                 uid: user.uid, // User UID
                 type: user.email === "ecpms@gmail.com" ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
             };
 
-            await setDoc(doc(db, "AuthDetails", user.uid), userData); // Save user data to Firestore
-
+            await setDoc(doc(db, "AuthDetails", user.email), userData); // Save user data to Firestore
             toast.success(`${user.email} Registered Successfully, Please Login...!`, { autoClose: 2500 });
             setTimeout(() => {
                 toggle(true); // Toggle to sign-in view
@@ -116,8 +123,10 @@ function Login_Register() {
             const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPass); // Sign in with email and password
             const user = userCredential.user; // Get user data
 
-            await updateDoc(doc(db, "AuthDetails", user.uid), {
-                signedIn: user.metadata.lastSignInTime // Update last sign-in time in Firestore
+            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
+
+            await updateDoc(doc(db, "AuthDetails", user.email), {
+                signedIn: signedInIST // Update last sign-in time in Firestore
             });
 
             toast.success("Logged in Successfully...!", { autoClose: 2500 });
