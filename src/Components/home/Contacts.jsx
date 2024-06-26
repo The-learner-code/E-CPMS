@@ -10,8 +10,6 @@ import mail_icon from '../../Assets/mail-icon.png';
 import phone_icon from '../../Assets/phone-icon.png';
 // Import the location icon
 import location_icon from '../../Assets/location-icon.png';
-// Import the white arrow icon
-import white_arrow from '../../Assets/white-arrow.png';
 
 // Assuming you have initialized Firestore as `db`
 import { db } from '../../firebase';
@@ -116,7 +114,7 @@ const Contacts = () => {
                     <label>Write your message here</label>
                     <textarea name="Message" rows="6" placeholder='Enter your message' required></textarea>
                     {/* Submit button with an icon */}
-                    <button type='submit' className='btn dark-btn'>Submit now <img src={white_arrow} alt="" /></button>
+                    <button type='submit' className='btn dark-btn'>Submit</button>
                 </form>
                 {/* Display the result message */}
                 <span>{result}</span>

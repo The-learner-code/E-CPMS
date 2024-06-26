@@ -1,11 +1,22 @@
 import styled from 'styled-components';
 import LR from '../Assets/Index.jpg';
 
+// Color variables
+const colors = {
+  primary: '#003366', // Navy Blue for primary actions
+  secondary: '#f5deb3', // Beige for secondary actions
+  background: '#f5f5f5', // Light grey background for container
+  overlayBackground: '#002244', // Dark Blue for overlay
+  buttonText: '#ffffff', // White text for buttons
+  linkText: '#003366', // Navy Blue for links
+  inputBackground: '#f5f5dc', // Light Beige for input background
+};
+
 // Body container
 export const Body = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(0, 0, 139, 0.7), rgba(0, 128, 128, 0.7)), url(${LR});
+  background: linear-gradient(135deg, rgba(225, 185, 65, 0.5), rgba(225, 185, 65, 0.7)), url(${LR});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -17,7 +28,7 @@ export const Body = styled.div`
 
 // Container for the whole component
 export const Container = styled.div`
-  background-color: #fff;
+  background-color: ${colors.background};
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
@@ -58,7 +69,7 @@ export const SignInContainer = styled.div`
 
 // Form styling
 export const Form = styled.form`
-  background-color: #ffffff;
+  background-color: ${colors.buttonText};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +87,7 @@ export const Title = styled.h1`
 
 // Input field styling
 export const Input = styled.input`
-  background-color: #eee;
+  background-color: ${colors.inputBackground};
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
@@ -85,27 +96,30 @@ export const Input = styled.input`
 
 // Back Button
 export const BackButton = styled.button`
-  width: 130px;
-  height: 50px;
+  width: 80px;
+  height: 40px;
   position: absolute;
-  top: 30px;
-  right: 40px;
-  font-size: 16px;
+  top: 25px;
+  right: 35px;
+  font-size: 14px;
   font-weight: bold;
-  background: rgba(0, 128, 128, 0.7);
-  color: #fff;
+  background: ${colors.background};
   border-radius: 20px;
   border: 0;
   outline: 0;
   cursor: pointer;
+  &:hover{
+  background: ${colors.primary};
+  color: ${colors.buttonText};
+  }
 `;
 
 // Button styling
 export const Button = styled.button`
   border-radius: 20px;
-  border: 1px solid #89f7fe;
-  background: rgba(0, 128, 128, 0.7);
-  color: #ffffff;
+  border: 1px solid ${colors.secondary};
+  background: ${colors.primary};
+  color: ${colors.buttonText};
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
@@ -123,12 +137,12 @@ export const Button = styled.button`
 // Ghost button styling
 export const GhostButton = styled(Button)`
   background-color: transparent;
-  border-color: #ffffff;
+  border-color: ${colors.buttonText};
 `;
 
 // Anchor (link) styling
 export const Anchor = styled.a`
-  color: #333;
+  color: ${colors.linkText};
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
@@ -149,11 +163,11 @@ export const OverlayContainer = styled.div`
 
 // Overlay styling
 export const Overlay = styled.div`
-  background: rgba(0, 128, 128, 1);
+  background-color: ${colors.overlayBackground};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
-  color: #ffffff;
+  color: ${colors.buttonText};
   position: relative;
   left: -100%;
   height: 100%;

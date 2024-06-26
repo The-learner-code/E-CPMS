@@ -170,7 +170,7 @@ function Login_Register() {
     return (
         <Components.Body>
             {/* Back to home button */}
-            <Components.BackButton onClick={() => navigate('/')}>Back to Home</Components.BackButton>
+            <Components.BackButton onClick={() => navigate('/')}>Home</Components.BackButton>
 
             {/* Toast container for displaying notifications */}
             {toastContainer}

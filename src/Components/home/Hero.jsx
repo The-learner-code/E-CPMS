@@ -19,7 +19,7 @@ const Hero = () => {
                 {/* Main heading */}
                 <h1>Empowering Your Future</h1>
                 {/* Paragraph text */}
-                <p>Your gateway to a successful career begins here. Explore opportunities, Connect with experienced staff, manage interview schedules, and track your progress seamlessly.</p>
+                <p>Your gateway to a successful career begins here. Explore opportunities, Connect with experienced staff, manage interview schedules, and track your progress seamlessly.</p> 
                 {/* Button to navigate to Login and Register page */}
                 <button className='btn' onClick={() => navigate('/LoginAndRegister')}>
                     Explore the features

@@ -6,8 +6,7 @@
 
 // Button styling
 .btn {
-    background: #fff;
-    color: #212121;
+    background: var(--border-color);
     padding: 14px;
     font-size: 18px;
     border-radius: 30px;
@@ -27,9 +26,8 @@
 
 // Dark button styling
 .btn.dark-btn {
-    background: linear-gradient(135deg, rgba(0, 0, 139, 0.5), rgba(0, 128, 128, 0.7));
-    color: rgba(255, 255, 255, 1);
-    /* White text */
+    background: var(--primary-color);
+    color: white;
 }
 
 // Navbar styling
@@ -37,37 +35,35 @@ nav {
     width: 100%;
     padding: 4px 0;
     position: fixed;
-    top: 0;
+    top: 1;
     left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-    color: rgba(255, 255, 255, 1);
-    /* White text */
+   color: whitesmoke;
 
     // Navbar logo styling
     .nv-logo {
-        border-radius: 10px;
         width: 210px;
         font-size: 26px;
-        font-weight: bolder;
+        font-weight: bold;
     }
 
     // Navbar list item styling
     ul li {
         display: inline-block;
         list-style: none;
-        margin: 10px 30px;
+        margin: 15px 30px;
         font-size: 16px;
         cursor: pointer;
-        font-weight: bolder;
+        font-weight: bold;
     }
 }
 
 // Dark navbar background styling for fixed state
 .dark-nav {
-    background: rgba(0, 0, 51, 1); /* Very Dark Blue */
+    background: var(--primary-color);
     transition: 0.5s;
 }
 
@@ -75,10 +71,9 @@ nav {
 .hero-lp {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(0, 0, 139, 0.5), rgba(0, 128, 128, 0.7)), url('../Assets/joshua-reddekopp-SyYmXSDnJ54-unsplash.jpg');
+    background: var(--sidebar-bg-gradient), url('../Assets/joshua-reddekopp-SyYmXSDnJ54-unsplash.jpg');
     background-size: cover;
-    /* Ensures the background image covers the entire element */
-    background-position: center;
+    background-position: 0% 65%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,20 +86,21 @@ nav {
         // Main heading styling
         h1 {
             padding-top: 35%;
+            padding-bottom: 1%;
             font-size: 60px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 1);
-            /* White text */
+            font-weight: bold;
+            color: whitesmoke;
         }
 
         // Paragraph text styling
         p {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 10px auto 20px;
             line-height: 1.4;
             color: rgba(255, 255, 255, 1);
-            /* White text */
-        }
+            font-size: medium;
+        } 
+        
     }
 }
 
@@ -136,12 +132,12 @@ nav {
     h3 {
         font-size: 16px;
         font-weight: 600;
-        color: rgba(0, 0, 139, 0.7);
+        color: var(--secondary-color);
     }
 
     h2 {
         font-size: 35px;
-        color: rgba(0, 0, 139, 0.7);
+        color: var(--secondary-color);
         margin: 10px 0;
         max-width: 400px;
     }
@@ -155,7 +151,7 @@ nav {
 // Title section styling
 .title {
     text-align: center;
-    color: rgba(0, 0, 139, 0.7);
+    color: var(--secondary-color);
     font-size: 15px;
     font-weight: 600;
     text-transform: uppercase;
@@ -163,7 +159,7 @@ nav {
 
     h2 {
         font-size: 32px;
-        color: rgba(0, 0, 139, 0.7);
+        color: var(--secondary-color);
         margin-top: 5px;
         text-transform: none;
     }
@@ -187,7 +183,7 @@ nav {
         }
 
         h3 {
-            color: #000e38;
+            color: var(--secondary-color);
             font-weight: 500;
             font-size: 25px;
             display: flex;

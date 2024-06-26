@@ -28,7 +28,7 @@ const Stu_Sidebar = () => {  // Define Stu_Sidebar functional component
         <div className="sidebar">  {/* Render sidebar container */}
             {toastContainer}{/* Render ToastContainer for notifications */}
             <div className="top">  {/* Render top section of sidebar */}
-                <span className="logo">PlacementPluse</span>  {/* Render logo text */}
+                <span className="logo">PlacementPulse</span>  {/* Render logo text */}
             </div>
             <hr />  {/* Render horizontal line */}
             <div className="center">  {/* Render center section of sidebar */}

@@ -1,16 +1,15 @@
 .sidebar {
     flex: 1;
-    border-right: 5px solid rgb(230, 227, 227);
+    border-right: 5px solid var(--border-color);
     min-height: 100vh;
-    /*background: #ecf0f1;*/
-    background: linear-gradient(rgba(22, 160, 133, 0.4), rgba(22, 160, 133, 0.4));
+    background: var(--sidebar-bg-gradient);
 
     .top {
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #16a085;
+        background: var(--primary-color);
 
         .logo {
             font-size: 20px;
@@ -21,7 +20,7 @@
 
     hr {
         height: 0;
-        border: 2.5px solid rgb(230, 227, 227);
+        border: 2.5px solid var(--border-color);
     }
 
     .center {
@@ -59,7 +58,8 @@
 
                 &:hover .icon,
                 &:hover span {
-                    color: black;
+                    color: var(--hover-color);
+                    /* Dark Navy Blue hover color */
                 }
             }
         }
@@ -101,11 +101,10 @@
 
                 &:hover .icon,
                 &:hover span {
-
-                    color: red;
+                    color: var(--icon-text-hover-color);
+                    /* Dark Slate Blue hover color */
                     transform: translateX(5px);
                 }
-
             }
         }
     }

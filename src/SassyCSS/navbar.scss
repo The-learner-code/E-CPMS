@@ -1,8 +1,8 @@
-// NavBar section style 
 .navbar {
-    background: #16a085;
+    background: var(--primary-color);
+    /* Navy Blue */
     height: 50px;
-    border-bottom: 0.5px solid rgb(231, 228, 228);
+    border-bottom: 0.5px solid var(--border-color);
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -11,7 +11,6 @@
         color: #ffffff;
         width: 100%;
         padding: 0 20px;
-
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -32,7 +31,23 @@
                     font-size: 20px;
                     transition: color 0.3s ease;
                 }
+
+                &:hover .icon,
+                &:hover span {
+                    color: var(--hover-color);
+                    /* Dark Navy Blue hover color */
+                }
             }
         }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
