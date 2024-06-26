@@ -32,7 +32,7 @@ const Navbar = () => {
         // Navbar element with dynamic class based on 'fixed' state
         <nav className={`container ${fixed ? 'dark-nav' : ''}`}>
             {/* Static navbar logo text */}
-            <span className='nv-logo'>Placement Plus</span>
+            <span className='nv-logo'>Placement Pulse</span>
             {/* Uncomment the following line to use an image logo instead */}
             {/* <img src={logo} alt="" className='nv-logo' /> */}
             {/* Navigation links */}

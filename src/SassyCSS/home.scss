@@ -45,7 +45,7 @@ nav {
 
     // Navbar logo styling
     .nv-logo {
-        width: 210px;
+        width: 300px;
         font-size: 26px;
         font-weight: bold;
     }
@@ -218,13 +218,14 @@ nav {
 .contactlp form textarea {
     display: block;
     width: 100%;
-    background: #ebecfe;
+    background: var(--inputBackground);
     padding: 15px;
     border: 0;
     outline: 0;
     margin-bottom: 15px;
     margin-top: 5px;
     resize: none;
+    border-radius: 10px;
 }
 
 // Footer section styling

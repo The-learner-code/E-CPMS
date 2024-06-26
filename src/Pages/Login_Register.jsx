@@ -90,8 +90,8 @@ function Login_Register() {
             const user = userCredential.user; // Get user data
 
             // Convert creation and last sign-in times to IST
-            const createdIST = moment(user.metadata.creationTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
-            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
+            const createdIST = moment(user.metadata.creationTime).tz('Asia/Kolkata').format('YYYY-MM-DD hh:mm:ss A');
+            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD hh:mm:ss A');
 
             const userData = {
                 email: user.email, // User email
@@ -123,7 +123,7 @@ function Login_Register() {
             const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPass); // Sign in with email and password
             const user = userCredential.user; // Get user data
 
-            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss A');
+            const signedInIST = moment(user.metadata.lastSignInTime).tz('Asia/Kolkata').format('YYYY-MM-DD hh:mm:ss A');
 
             await updateDoc(doc(db, "AuthDetails", user.email), {
                 signedIn: signedInIST // Update last sign-in time in Firestore

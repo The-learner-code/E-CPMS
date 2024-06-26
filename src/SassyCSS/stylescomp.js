@@ -15,8 +15,8 @@ const colors = {
 // Body container
 export const Body = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(135deg, rgba(225, 185, 65, 0.5), rgba(225, 185, 65, 0.7)), url(${LR});
+  min-height: 100vh; 
+  background: linear-gradient(135deg, rgba(225, 185, 65, 0.3), rgba(225, 185, 65, 0.3)), url(${LR});
   background-size: cover;
   background-position: center;
   display: flex;
