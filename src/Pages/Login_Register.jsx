@@ -45,9 +45,7 @@ function Login_Register() {
     };
 
     // Function to validate email format
-    //const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com)$/.test(String(email).toLowerCase());
-    //const validateEmail = (email) => /^[0-9]+(staff)?@(gmail\.com|ecpms\.gmail\.com)$/.test(String(email).toLowerCase());
-    const validateEmail = (email) => /^(?:[0-9]+(staff)?|ecpms)@gmail\.com$/.test(String(email).toLowerCase());
+    const validateEmail = (email) => /^(?:[0-9]+(staff)?|ecpms\w*)@gmail\.com$/.test(String(email).toLowerCase());
 
     // Function to handle registration process
     const handleRegister = async (e) => {
@@ -59,7 +57,7 @@ function Login_Register() {
 
         // Validate email format
         if (!validateEmail(trimmedEmail)) {
-            toast.error("Please enter a valid Email_id...! Should be '123@gmail.com' Only.", { autoClose: 2500 });
+            toast.error("Please enter a valid Email_id...!", { autoClose: 2500 });
             resetForm();
             return;
         }
@@ -98,7 +96,7 @@ function Login_Register() {
                 created: createdIST, // User account creation time in IST
                 signedIn: signedInIST, // Last sign-in time in IST
                 uid: user.uid, // User UID
-                type: user.email === "ecpms@gmail.com" ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
+                type: user.email.includes("ecpms") ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
             };
 
             await setDoc(doc(db, "AuthDetails", user.email), userData); // Save user data to Firestore
@@ -131,7 +129,7 @@ function Login_Register() {
 
             toast.success("Logged in Successfully...!", { autoClose: 2500 });
             setTimeout(() => {
-                if (trimmedEmail === "ecpms@gmail.com") { // Check if user is admin
+                if (trimmedEmail.includes("ecpms") ) { // Check if user is admin
                     navigate('/ListOfUsers'); // Navigate to admin page
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
                     navigate('/ListOfStudents'); // Navigate to staff page

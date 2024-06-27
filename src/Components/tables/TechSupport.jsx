@@ -43,10 +43,10 @@ const TechSupportTable = () => {
 
   // Define columns for the DataGrid
   const columns = [
-    { field: 'Email_id', headerName: 'Email', width: 300 },  // Email column
-    { field: 'Registered_no', headerName: 'Registered Number', width: 220 },  // Registered number column
-    { field: 'Message', headerName: 'Message', width: 400 },  // Message column
-    { field: 'Timestamp', headerName: 'Timestamp (IST)', width: 250 },  // Timestamp column
+    { field: 'Timestamp', headerName: 'Timestamp (IST)', width: 200 },  // Timestamp column
+    { field: 'Email_id', headerName: 'Email', width: 200 },  // Email column
+    { field: 'Registered_no', headerName: 'Registered Number', width: 150 },  // Registered number column
+    { field: 'Message', headerName: 'Message', width: 800 },  // Message column
   ];
 
   // Render the DataGrid component with the fetched data

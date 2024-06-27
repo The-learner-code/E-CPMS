@@ -2,8 +2,6 @@
 import React from 'react';
 // Import the CSS file for styling
 import '../../SassyCSS/home.scss';
-// Import the message icon
-import msg_icon from '../../Assets/msg-icon.png';
 // Import the mail icon
 import mail_icon from '../../Assets/mail-icon.png';
 // Import the phone icon
@@ -30,7 +28,7 @@ const Contacts = () => {
         const formData = new FormData(event.target);
     
         // Append access key to the form data
-        formData.append("access_key", "960cf01f-f92d-4853-ac73-1136637d5814");
+        formData.append("access_key", "08a07d38-5ca7-4563-9bdf-eef01025fcb8");
     
         // Send form data to the server using fetch API
         const response = await fetch("https://api.web3forms.com/submit", {
@@ -87,15 +85,15 @@ const Contacts = () => {
             {/* First column containing the contact information */}
             <div className="contact-col">
                 {/* Heading with an icon */}
-                <h3>Send us a message<img src={msg_icon} alt="" /></h3>
+                <h3>Send us a message</h3>
                 {/* Paragraph text providing information */}
                 <p>Feel free to reach out through contact form or find our contact information below. Your feedback, questions, and suggestion are important to us as we strive to provide exceptional services to our university community.</p>
                 {/* List of contact details */}
                 <ul>
                     {/* Email contact detail */}
-                    <li><img src={mail_icon} alt="" />Contact@ecpms.dev</li>
+                    <li><img src={mail_icon} alt="" />Cecpms@gmail.com</li>
                     {/* Phone contact detail */}
-                    <li><img src={phone_icon} alt="" />+1 123-456-7890</li>
+                    <li><img src={phone_icon} alt="" />+91 978-6534-201</li>
                     {/* Address contact detail */}
                     <li><img src={location_icon} alt="" />88 Seven block, Cambridge<br /> MA 02139, TamilNadu</li>
                 </ul>
@@ -112,7 +110,7 @@ const Contacts = () => {
                     <input type="tel" name='Registered_no' placeholder='Enter your registered No' required />
                     {/* Label and textarea for message */}
                     <label>Write your message here</label>
-                    <textarea name="Message" rows="6" placeholder='Enter your message' required></textarea>
+                    <textarea name="Message" rows="6" placeholder='Enter your message, Admin will assist you soon...!' required></textarea>
                     {/* Submit button with an icon */}
                     <button type='submit' className='btn dark-btn'>Submit</button>
                 </form>

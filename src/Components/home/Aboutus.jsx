@@ -1,7 +1,7 @@
 // Import the CSS file for styling
 import '../../SassyCSS/home.scss';
 // Import the image for the about section
-import about_img from '../../Assets/Graduate.jpg';
+import about_img from '../../Assets/gallery-3.png';
 
 // Define the Aboutus functional component
 const Aboutus = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';  // Import React, useState, and useEffect from React library
+import React, { useState, useEffect, useRef } from 'react';  // Import React, useState, and useEffect from React library
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook from React Router
 import { auth, db } from "../firebase";  // Import auth and db from Firebase
 import { doc, getDoc } from "firebase/firestore";  // Import doc and getDoc from Firestore
@@ -9,37 +9,42 @@ import Navbar from '../Components/navbar/Navbar';  // Import Navbar component
 import '../SassyCSS/viewprofile.scss';  // Import styles for view profile page
 
 const ViewProfile = () => {  // Define ViewProfile functional component
-  const navigate = useNavigate();  // Initialize navigate function from React Router
+ 
   const [profileData, setProfileData] = useState(null);  // Initialize state for profile data
+  const toastShownRef = useRef(false);
+  const navigate = useNavigate(); // Initialize navigate function from React Router
 
   useEffect(() => {
-    // Fetch profile data from Firestore on component mount
     const fetchProfileData = async () => {
       const user = auth.currentUser;
       if (user) {
         const docRef = doc(db, "StudentsInformation", user.email);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          // Set profileData state with fetched document data
           setProfileData(docSnap.data());
         } else {
-          // Notify user and redirect if no data found
-          toast.warn("No data found. Redirecting to update profile page...");
-          setTimeout(() => {
-            navigate('/UpdateProfile');
-          }, 2500);
+          if (!toastShownRef.current) {
+            toast.warn("No data found. Redirecting to update profile page...");
+            toastShownRef.current = true;
+            setTimeout(() => {
+              navigate('/UpdateProfile');
+            }, 2500);
+          }
         }
       } else {
-        // Notify if user is not valid and redirect to login/register page
-        toast.error("Not a valid user");
-        setTimeout(() => {
-          navigate('/LoginAndRegister');
-        }, 2500);
+        if (!toastShownRef.current) {
+          toast.error("Not a valid user");
+          toastShownRef.current = true;
+          setTimeout(() => {
+            navigate('/LoginAndRegister');
+          }, 2500);
+        }
       }
     };
 
-    fetchProfileData();  // Call fetchProfileData function
-  }, [navigate]);  // Dependency array for useEffect to run only once
+    fetchProfileData();
+  }, [navigate]);
+
 
   return (
     <div className='profile'>

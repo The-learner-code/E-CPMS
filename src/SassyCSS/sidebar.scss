@@ -46,7 +46,6 @@
 
                 .icon {
                     font-size: 24px;
-                    transition: color 0.3s ease;
                 }
 
                 span {
@@ -59,7 +58,6 @@
                 &:hover .icon,
                 &:hover span {
                     color: var(--hover-color);
-                    /* Dark Navy Blue hover color */
                 }
             }
         }
@@ -101,9 +99,7 @@
 
                 &:hover .icon,
                 &:hover span {
-                    color: var(--icon-text-hover-color);
-                    /* Dark Slate Blue hover color */
-                    transform: translateX(5px);
+                    color: red;
                 }
             }
         }
