@@ -109,6 +109,7 @@ const BatchEntryForm = () => {
                 id="department"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
+                placeholder='BCA / MCA / B.Sc / M.Sc / B.Tech / M.Tech'
                 required
               />
             </div>

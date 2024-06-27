@@ -14,8 +14,8 @@
                 padding: 10px;
                 outline: 0;
                 border: 0;
-                background: darkgreen;
-                color: white;
+                color: darkgreen;
+                background: lightgreen;
                 cursor: pointer;
             }
         }
@@ -31,7 +31,7 @@
 
             .list-title {
                 font-weight: 600;
-                color: var(--secondary-color);
+                color: var(--primary-color);
                 margin-bottom: 15px;
             }
         }

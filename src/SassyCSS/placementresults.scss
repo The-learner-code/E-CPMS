@@ -15,11 +15,8 @@
                 outline: 0;
                 border: 0;
                 color: darkgreen;
+                background: lightgreen;
                 cursor: pointer;
-
-                &:hover {
-                    background: lightgreen;
-                }
             }
         }
 
@@ -34,7 +31,7 @@
 
             .list-title {
                 font-weight: 600;
-                color: var(--secondary-color);
+                color: var(--primary-color);
                 margin-bottom: 15px;
             }
         }

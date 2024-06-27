@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';  // Import React, useState, 
 import { collection, getDocs } from 'firebase/firestore';  // Import collection and getDocs from Firestore
 import { db } from '../../firebase'; // Ensure this path matches your project structure
 import { DataGrid } from '@mui/x-data-grid';  // Import DataGrid component from Material-UI X package
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer and toast components from React Toastify
-import 'react-toastify/dist/ReactToastify.css';  // Import React Toastify CSS for styling
+import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
 import '../../SassyCSS/table.scss';  // Import custom CSS styles for table
 
 const Tablenotify = () => {
@@ -71,7 +70,7 @@ const Tablenotify = () => {
 
     return (
         <div className="table-container">
-            <ToastContainer />
+            {toastContainer}
             <div style={{ height: 450, width: '100%' }}>
                 {/* Render DataGrid with notifications data */}
                 <DataGrid 
@@ -80,10 +79,10 @@ const Tablenotify = () => {
                     loading={loading}
                     initialState={{
                         pagination: {
-                          paginationModel: { page: 0, pageSize: 5 },
+                          paginationModel: { page: 0, pageSize: 10 },
                         },
                       }}
-                      pageSizeOptions={[5, 10]}
+                      pageSizeOptions={[5, 10, 20]}
                 />
             </div>
         </div>

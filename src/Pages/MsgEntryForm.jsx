@@ -68,6 +68,7 @@ const MsgEntryForm = () => {
                                 id="type"
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
+                                placeholder='Message / Alert / Event / General'
                                 required
                             />
                         </div>
@@ -77,6 +78,7 @@ const MsgEntryForm = () => {
                                 id="content"
                                 value={content}
                                 onChange={(e) => setContent(e.target.value)}
+                                placeholder='Please enter the notification message content'
                                 required
                             />
                         </div>
@@ -107,6 +109,7 @@ const MsgEntryForm = () => {
                                 id="link"
                                 value={link}
                                 onChange={(e) => setLink(e.target.value)}
+                                placeholder='Provide the accessible link'
                                 required
                             />
                         </div>

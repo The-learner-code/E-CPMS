@@ -78,10 +78,10 @@ const Tablenotify = () => {
                     loading={loading} // Loading state
                     initialState={{
                         pagination: {
-                            paginationModel: { page: 0, pageSize: 5 }, // Initial pagination settings
+                            paginationModel: { page: 0, pageSize: 10 }, // Initial pagination settings
                         },
                     }}
-                    pageSizeOptions={[5, 10]} // Options for page size
+                    pageSizeOptions={[5, 10, 20]} // Options for page size
                 />
             </div>
         </div>
