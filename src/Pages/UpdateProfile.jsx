@@ -102,10 +102,8 @@ const UpdateProfile = () => {
     const validateEmail = (emailid) => /^[0-9]+@(sastra\.ac\.in|gmail\.com)$/.test(String(emailid).toLowerCase());
 
     const handlePhotoUpload = async () => {
-        if (!photo) {
-            toast.error("Photo is required");
-            return null;
-        }
+
+        if (!photo) return photoURL;
         const photoRef = ref(storage, `user_photos/${auth.currentUser.uid}/${photo.name}`);
         await uploadBytes(photoRef, photo);
         return await getDownloadURL(photoRef);
@@ -113,10 +111,7 @@ const UpdateProfile = () => {
 
     // Function to handle resume upload to Firebase Storage
     const handleResumeUpload = async () => {
-        if (!resume) {
-            toast.error("Resume is required");
-            return null;
-        }
+        if (!resume) return resumeURL;
         if (resume.type !== "application/pdf") {
             toast.error("Only PDF files are allowed for resume");
             return null;
