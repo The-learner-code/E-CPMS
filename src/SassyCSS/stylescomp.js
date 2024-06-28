@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LR from '../Assets/Index.jpg';
+import LR from '../Assets/capture.jpg';
 
 // Color variables
 const colors = {
