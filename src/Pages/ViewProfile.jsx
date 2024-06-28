@@ -32,13 +32,13 @@ const ViewProfile = () => {  // Define ViewProfile functional component
           }
         }
       } else {
-        if (!toastShownRef.current) {
+        /*if (!toastShownRef.current) {
           toast.error("Not a valid user");
           toastShownRef.current = true;
           setTimeout(() => {
             navigate('/LoginAndRegister');
           }, 2500);
-        }
+        }*/
       }
     };
 

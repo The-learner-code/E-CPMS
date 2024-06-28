@@ -31,7 +31,7 @@ const UpdateProfile = () => {
     const [resumeURL, setResumeURL] = useState(""); // State for resume URL
 
     // Effect to set email id if user is logged in
-    useEffect(() => {
+    /*useEffect(() => {
         const user = auth.currentUser;
         if (user) {
             setEmailid(user.email);
@@ -41,7 +41,7 @@ const UpdateProfile = () => {
                 navigate('/');
             }, 2500);
         }
-    }, [navigate]);
+    }, [navigate]);*/
 
     // Effect to fetch user data from Firestore
     useEffect(() => {
@@ -101,9 +101,11 @@ const UpdateProfile = () => {
     // Function to validate email format
     const validateEmail = (emailid) => /^[0-9]+@(sastra\.ac\.in|gmail\.com)$/.test(String(emailid).toLowerCase());
 
-    // Function to handle photo upload to Firebase Storage
     const handlePhotoUpload = async () => {
-        if (!photo) return photoURL;
+        if (!photo) {
+            toast.error("Photo is required");
+            return null;
+        }
         const photoRef = ref(storage, `user_photos/${auth.currentUser.uid}/${photo.name}`);
         await uploadBytes(photoRef, photo);
         return await getDownloadURL(photoRef);
@@ -111,7 +113,10 @@ const UpdateProfile = () => {
 
     // Function to handle resume upload to Firebase Storage
     const handleResumeUpload = async () => {
-        if (!resume) return resumeURL;
+        if (!resume) {
+            toast.error("Resume is required");
+            return null;
+        }
         if (resume.type !== "application/pdf") {
             toast.error("Only PDF files are allowed for resume");
             return null;
@@ -226,7 +231,7 @@ const UpdateProfile = () => {
     return (
         <div className="new">
             {/* Toast notification container */}
-           {toastContainer}
+            {toastContainer}
             {/* Sidebar component */}
             <Sidebar />
 
@@ -288,27 +293,54 @@ const UpdateProfile = () => {
 
                             <div className="forminput">
                                 <label>Batch :</label>
-                                <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} />
+                                <select value={batch} onChange={(e) => setBatch(e.target.value)} >
+                                    <option value="">Select Batch</option>
+                                    {Array.from({ length: 50 }, (_, i) => 1975 + i).map(year => (
+                                        <option key={year} value={year}>{year}</option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="forminput">
                                 <label>Department :</label>
-                                <input type="text" value={dep} onChange={(e) => setDep(e.target.value)} />
+                                <select value={dep} onChange={(e) => setDep(e.target.value)} >
+                                    <option value="">Select Department</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="B.Sc">B.Sc</option>
+                                    <option value="M.Sc">M.Sc</option>
+                                    <option value="B.Tech">B.Tech</option>
+                                    <option value="M.Tech">M.Tech</option>
+                                </select>
                             </div>
+
 
                             <div className="forminput">
                                 <label>Current Semester :</label>
-                                <input type="text" value={sem} onChange={(e) => setSem(e.target.value)} />
+                                <select value={sem} onChange={(e) => setSem(e.target.value)} >
+                                    <option value="">Pursuing Semester</option>
+                                    <option value="First">First</option>
+                                    <option value="Second">Second</option>
+                                    <option value="Third">Third</option>
+                                    <option value="Fourth">Fourth</option>
+                                    <option value="Fifth">Fifth</option>
+                                    <option value="Sixth">Sixth</option>
+                                    <option value="Seventh">Seventh</option>
+                                    <option value="Eighth">Eighth</option>
+                                </select>
                             </div>
 
                             <div className="forminput">
                                 <label>Current CGPA :</label>
                                 <input type="text" value={cgpa} onChange={(e) => setCGPA(e.target.value)} />
                             </div>
-
                             <div className="forminput">
                                 <label>Placement Status :</label>
-                                <input type="text" value={placementStatus} onChange={(e) => setPlacementStatus(e.target.value)} />
+                                <select value={placementStatus} onChange={(e) => setPlacementStatus(e.target.value)} >
+                                    <option value="">Select Placement Status</option>
+                                    <option value="Placed">Placed</option>
+                                    <option value="Non-Placed">Non-Placed</option>
+                                </select>
                             </div>
 
                             <div className="forminput">

@@ -1,3 +1,4 @@
+import { toastContainer } from './toastservice'; // Correct import for ToastContainer
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  // Importing necessary components from react-router-dom
 import Home from './Pages/HomePage';  // Importing the Home component
 import LoginAndRegister from './Pages/Login_Register';  // Importing the LoginAndRegister component
@@ -16,6 +17,7 @@ import TechSupport from './Pages/TechSupport'; // Importing the TechSupport comp
 const App = () => {
   return (
     <div>
+      {toastContainer}
       {/* Using BrowserRouter for setting up routing */}
       <BrowserRouter>
         <Routes>
