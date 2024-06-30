@@ -13,6 +13,9 @@ import MsgEntryForm from './Pages/MsgEntryForm';  // Importing the MsgEntryForm 
 import AddNotification from './Pages/AddNotification';  // Importing the AddNotification component
 import ListOfUsers from './Pages/ListOfUsers'; // Importing the ListOfUsers component
 import TechSupport from './Pages/TechSupport'; // Importing the TechSupport component
+import PlacementResult from './Reports/PlacementResult';
+import PlacementResultPie from './Reports/PlacementResultPie';
+
 
 const App = () => {
   return (
@@ -35,6 +38,8 @@ const App = () => {
           <Route path='/AddNotification' element={<AddNotification />} />  {/* Route for AddNotification page */}
           <Route path='/ListOfUsers' element={<ListOfUsers />} /> {/* Route for ListOfUsers page */}
           <Route path='/TechSupport' element={<TechSupport />} /> {/* Route for TechSupport page */}
+          <Route path='/Analysis' element={<PlacementResult />} /> {/* Route for TechSupport page */}
+          <Route path='/ComAnalysis' element={<PlacementResultPie />} /> {/* Route for TechSupport page */}
         </Routes>
       </BrowserRouter>
     </div>

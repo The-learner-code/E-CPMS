@@ -31,6 +31,7 @@ const BatchEntryForm = () => {
   const [department, setDepartment] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [jobRole, setJobRole] = useState('');
+  const [sbatch, setSbatch] = useState('');
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -49,6 +50,7 @@ const BatchEntryForm = () => {
           department,
           company_name: companyName,
           job_role: jobRole,
+          sbatch,
         });
       });
 
@@ -65,6 +67,7 @@ const BatchEntryForm = () => {
       setDepartment('');
       setCompanyName('');
       setJobRole('');
+      setSbatch('');
     } catch (error) {
       console.error('Error adding documents: ', error);
       // Show error toast message
@@ -110,6 +113,18 @@ const BatchEntryForm = () => {
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
                 placeholder='BCA / MCA / B.Sc / M.Sc / B.Tech / M.Tech'
+                required
+              />
+            </div>
+
+            {/* Department input field */}
+            <div className="form-group">
+              <label htmlFor="deparsbatchtment">Batch</label>
+              <input
+                type="text"
+                id="sbatch"
+                value={sbatch}
+                onChange={(e) => setSbatch(e.target.value)}
                 required
               />
             </div>

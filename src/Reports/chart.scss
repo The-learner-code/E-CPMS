@@ -1,0 +1,36 @@
+.placement-result-grid {
+    padding: 5px;
+}
+
+.placement-result-paper {
+    padding: 16px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    width: 500px;
+}
+
+.placement-result-container {
+    padding: 5px;
+}
+
+// Custom styles for Select component
+#batch-select-label {
+    background-color: white; // Adjust as needed
+}
+
+.placement-result-paper-batch {
+    padding: 16px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    width: 550px;
+}
+  
+  .placement-result-paper-pie {
+    padding: 13px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    width: 540px;
+  }
+  
+  .placement-result-typography-pie {
+    text-align: center;
+    margin-bottom: 16px; // This is equivalent to gutterBottom
+  }
+  

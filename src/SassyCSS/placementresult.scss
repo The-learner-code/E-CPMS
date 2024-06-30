@@ -1,0 +1,37 @@
+.PlacementResult {
+    display: flex;
+    width: 100%;
+
+    .PlacementResultContainer {
+        flex: 6;
+
+        .GraphContainer {
+            background-color: rgb(230, 227, 227);
+            border-radius: 10px;
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 50px;
+            margin: 35px;
+
+            .left {
+                display: flex;
+            }
+        }
+
+        .GraphContainer-right {
+            background-color: rgb(230, 227, 227);
+            border-radius: 10px;
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 5px;
+            margin: 10px;
+            margin-top: 4%;
+
+            .right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
