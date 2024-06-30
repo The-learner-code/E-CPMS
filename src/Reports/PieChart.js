@@ -66,9 +66,9 @@ const PieChart = ({ dataByCompany }) => {
   return ( 
     <Grid  className="placement-result-item-pie">
     <Paper className="placement-result-paper-pie">
-      <Typography variant="h6" gutterBottom align="center" className="placement-result-typography-pie">
+   {/*<Typography variant="h6" gutterBottom align="center" className="placement-result-typography-pie">
         Pie Chart Example
-      </Typography>
+      </Typography>*/}
       <Pie data={chartDataByCompany} options={options} />
     </Paper>
   </Grid>

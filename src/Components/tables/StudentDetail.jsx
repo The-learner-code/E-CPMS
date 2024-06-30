@@ -1,37 +1,27 @@
-// Importing necessary hooks and components from React and other libraries
-import { useState, useEffect } from 'react';
-import { collection, getDocs } from "firebase/firestore"; // Importing Firestore functions for data retrieval
-import { db } from "../../firebase"; // Importing the configured Firestore instance
-import { DataGrid } from '@mui/x-data-grid'; // Importing the DataGrid component for table display
-import { CircularProgress, Link } from '@mui/material'; // Importing Material-UI components for progress indicator and links
-import '../../SassyCSS/table.scss'; // Importing custom CSS for styling the table
+import React, { useState, useEffect, useCallback } from 'react';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
+import { DataGrid } from '@mui/x-data-grid';
+import { CircularProgress, Link } from '@mui/material';
+import '../../SassyCSS/table.scss';
 
 const StudentTable = () => {
-
-  // State to store the fetched students
   const [students, setStudents] = useState([]);
-  // State to manage loading status
   const [loading, setLoading] = useState(true);
 
-
-  useEffect(() => {
-    // Function to fetch student data from Firestore
-    const fetchStudents = async () => {
-      const studentsCollection = collection(db, "StudentsInformation");
-      const studentsSnapshot = await getDocs(studentsCollection);
-      // Map the documents to an array of student data objects
-      const studentsList = studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      // Update state with the fetched students
-      setStudents(studentsList);
-      // Set loading to false after data is fetched
-      setLoading(false);
-    };
-
-    // Call the fetch function
-    fetchStudents();
+  const fetchStudents = useCallback(async () => {
+    setLoading(true);
+    const studentsCollection = collection(db, "StudentsInformation");
+    const studentsSnapshot = await getDocs(studentsCollection);
+    const studentsList = studentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setStudents(studentsList);
+    setLoading(false);
   }, []);
 
-  // Define columns for the DataGrid
+  useEffect(() => {
+    fetchStudents();
+  }, [fetchStudents]);
+
   const columns = [
     { field: 'Name', headerName: 'Name', width: 150 },
     { field: 'Register_No', headerName: 'Register No', width: 120 },
@@ -51,7 +41,6 @@ const StudentTable = () => {
       headerName: 'Photo',
       width: 100,
       renderCell: (params) => (
-        // Render a clickable link to view the photo
         <Link href={params.value} target="_blank" rel="noopener">
           View Photo
         </Link>
@@ -62,7 +51,6 @@ const StudentTable = () => {
       headerName: 'Resume',
       width: 120,
       renderCell: (params) => (
-        // Render a clickable link to view the resume
         <Link href={params.value} target="_blank" rel="noopener">
           View Resume
         </Link>
@@ -71,26 +59,23 @@ const StudentTable = () => {
   ];
 
   return (
-    // Container for the DataGrid component
     <div className="table-container">
       {loading ? <CircularProgress /> : (
         <div style={{ height: 550, width: '100%' }}>
-          {/* DataGrid component to display student data */}
           <DataGrid
             rows={students}
             columns={columns}
-            loading={loading}
             initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
-                },
-              }}
-              pageSizeOptions={[5, 10]}
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
           />
         </div>
       )}
     </div>
   );
-}
+};
 
 export default StudentTable;

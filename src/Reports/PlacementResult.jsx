@@ -1,5 +1,5 @@
 // Importing the styles for the notification component
-import '../SassyCSS/placementresult.scss';
+import '../SassyCSS/placementresulttlb.scss';
 
 import React, { useEffect, useState } from 'react';
 
@@ -47,8 +47,3 @@ const PlacementResult = () => {
 };
 
 export default PlacementResult;
-
-
-/*<div className="Left">
-          <PieChart dataByCompany={dataByCompany} />
-        </div>*/
