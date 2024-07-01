@@ -108,6 +108,13 @@ export const BackButton = styled.button`
   border: 0;
   outline: 0;
   cursor: pointer;
+  transition: transform 80ms ease-in;
+    &:active {
+    transform: scale(0.95);
+  }
+  &:focus {
+    outline: none;
+  }
   &:hover{
   background: ${colors.primary};
   color: ${colors.buttonText};

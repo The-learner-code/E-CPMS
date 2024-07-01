@@ -2,9 +2,9 @@ import React from 'react';  // Import React library
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook from React Router
 import { auth } from "../../firebase";  // Import 'auth' object from Firebase
 import '../../SassyCSS/sidebar.scss';  // Import styles for the sidebar component
-import AccountBoxIcon from '@mui/icons-material/AccountBox';  // Import AccountBoxIcon from Material-UI icons
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';  // Import AssignmentTurnedInIcon from Material-UI icons
-import NotificationsIcon from '@mui/icons-material/Notifications';  // Import NotificationsIcon from Material-UI icons
+import ContactPageIcon from '@mui/icons-material/ContactPage'; // Import ContactPageIcon from Material-UI icons
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'; // Import PublishedWithChangesIcon from Material-UI icons
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';  // Import NotificationsIcon from Material-UI icons
 import LogoutIcon from '@mui/icons-material/Logout';  // Import LogoutIcon from Material-UI icons
 import { signOut } from "firebase/auth";  // Import signOut function from Firebase auth
 import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
@@ -34,15 +34,15 @@ const Stu_Sidebar = () => {  // Define Stu_Sidebar functional component
             <div className="center">  {/* Render center section of sidebar */}
                 <ul>  {/* Render unordered list */}
                     <li onClick={() => navigate('/ViewProfile')}>  {/* Render list item for profile page with click event to navigate */}
-                        <AccountBoxIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
+                        <ContactPageIcon className='icon' />  {/* Render ContactPageIcon with CSS class 'icon' */}
                         <span>Profile</span>  {/* Render text 'Profile' */}
                     </li>
                     <li onClick={() => navigate('/ViewPlacementResults')}>  {/* Render list item for placement result page with click event to navigate */}
-                        <AssignmentTurnedInIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
-                        <span>Placement Result</span>  {/* Render text 'Placement Result' */}
+                        <PublishedWithChangesIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
+                        <span>Placement Results</span>  {/* Render text 'Placement Result' */}
                     </li>
                     <li onClick={() => navigate('/ViewNotificationMsg')}>  {/* Render list item for notification page with click event to navigate */}
-                        <NotificationsIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
+                        <NotificationsActiveIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
                         <span>Notifications</span>  {/* Render text 'Notifications' */}
                     </li>
                 </ul>
