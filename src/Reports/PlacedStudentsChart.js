@@ -84,7 +84,7 @@ const PlacedStudentsChart = () => {
       <Grid className="placement-result-item">
         <Paper className="placement-result-paper-batch">
           <Typography variant="h6" gutterBottom align="center">
-            Placed Student By Department Based on Batch
+            Batch wise Placement % on Department
           </Typography>
           <FormControl variant="outlined" fullWidth margin="normal" >
             <InputLabel id="batch-select-label">Batch</InputLabel>

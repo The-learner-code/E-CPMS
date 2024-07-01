@@ -44,8 +44,8 @@ function Login_Register() {
         setLpass(""); // Reset login password
     };
 
-    // Function to validate email format
-    const validateEmail = (email) => /^(?:[0-9]+(staff)?|ecpms\w*)@gmail\.com$/.test(String(email).toLowerCase());
+    // Function to validate email format 
+    const validateEmail = (email) => /^(?:[0-9]+(staff)?|enchancedcpms\w*)@gmail\.com$/.test(String(email).toLowerCase());
 
     // Function to handle registration process
     const handleRegister = async (e) => {
@@ -129,7 +129,7 @@ function Login_Register() {
 
             toast.success("Logged in Successfully...!", { autoClose: 2500 });
             setTimeout(() => {
-                if (trimmedEmail.includes("ecpms") ) { // Check if user is admin
+                if (trimmedEmail.includes("enchancedcpms") ) { // Check if user is admin
                     navigate('/ListOfUsers'); // Navigate to admin page
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
                     navigate('/ListOfStudents'); // Navigate to staff page

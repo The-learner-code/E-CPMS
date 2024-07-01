@@ -5,13 +5,14 @@ import { getFirestore } from "firebase/firestore"; // Import to handle Firestore
 import { getStorage } from "firebase/storage"; // Import to handle Firebase storage
 
 // Firebase configuration object containing the project's API key and other identifiers
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAWduwG-4QbKsjmIwx4Jyhc65NjbSFhnow",
-  authDomain: "enhanced-cpm.firebaseapp.com",
-  projectId: "enhanced-cpm",
-  storageBucket: "enhanced-cpm.appspot.com",
-  messagingSenderId: "593714201263",
-  appId: "1:593714201263:web:7d4eef9e57800bd5e10a5a"
+  apiKey: "AIzaSyB75c74Bz3iSexHFP62g10Or7rAKOpjtV4",
+  authDomain: "e-cpms.firebaseapp.com",
+  projectId: "e-cpms",
+  storageBucket: "e-cpms.appspot.com",
+  messagingSenderId: "978178498404",
+  appId: "1:978178498404:web:cc17af632f9c6d8ed0a471"
 };
 
 // Initialize Firebase app with the provided configuration

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for n
 import { db } from '../firebase'; // Import Firebase Firestore instance
 import { toast, toastContainer } from '../toastservice'; // Import ToastContainer and toast for notifications
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS for notifications
-import Sidebar from '../Components/sidebar/Staff_Sidebar'; // Import Sidebar component
+import Sidebar from '../Components/sidebar/Admin_Sidebar'; // Import Sidebar component
 import Navbar from '../Components/navbar/Navbar'; // Import Navbar component
 import '../SassyCSS/msgentryform.scss'; // Import custom Sassy CSS styles for MsgEntryForm
 
@@ -44,7 +44,7 @@ const MsgEntryForm = () => {
             setValidTo(''); // Clear the valid to date input field
             setLink(''); // Clear the link input field
             setTimeout(() => {
-                navigate('/AddNotification'); // Navigate to AddNotification page after 2 seconds
+                navigate('/AddNotificationAdmin'); // Navigate to AddNotification page after 2 seconds
             }, 2500);
         } catch (error) {
             console.error("Error adding notification: ", error); // Log error to console

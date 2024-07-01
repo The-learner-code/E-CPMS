@@ -2,10 +2,11 @@ import React from 'react';  // Import React library
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook from React Router
 import { auth } from "../../firebase";  // Import 'auth' object from Firebase
 import '../../SassyCSS/sidebar.scss';  // Import styles for the sidebar component
-import AccountBoxIcon from '@mui/icons-material/AccountBox';  // Import AccountBoxIcon from Material-UI icons
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';  // Import AssignmentTurnedInIcon from Material-UI icons
-import NotificationsIcon from '@mui/icons-material/Notifications';  // Import NotificationsIcon from Material-UI icons
-import AnalyticsIcon from '@mui/icons-material/Analytics';
+import InfoIcon from '@mui/icons-material/Info';  // Import InfoIcon from Material-UI icons
+import GradingIcon from '@mui/icons-material/Grading';  // Import AssignmentTurnedInIcon from Material-UI icons
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd';  // Import NotificationAddIcon from Material-UI icons
+import BarChartIcon from '@mui/icons-material/BarChart';
+import PieChartIcon from '@mui/icons-material/PieChart';
 import LogoutIcon from '@mui/icons-material/Logout';  // Import LogoutIcon from Material-UI icons
 import { signOut } from "firebase/auth";  // Import signOut function from Firebase auth
 import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
@@ -35,23 +36,23 @@ const Stu_Sidebar = () => {  // Define Stu_Sidebar functional component
             <div className="center">  {/* Render center section of sidebar */}
                 <ul>  {/* Render unordered list */}
                     <li onClick={() => navigate('/ListOfStudents')}>  {/* Render list item for Student Details with click event to navigate */}
-                        <AccountBoxIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
+                        <InfoIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
                         <span>Student Details</span>  {/* Render text 'Student Details' */}
                     </li>
                     <li onClick={() => navigate('/AddPlacementResults')}>  {/* Render list item for placement result page with click event to navigate */}
-                        <AssignmentTurnedInIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
-                        <span>Update Result</span>  {/* Render text 'Update Result' */}
+                        <GradingIcon className='icon' />  {/* Render GradingIcon with CSS class 'icon' */}
+                        <span>Add Result</span>  {/* Render text 'Update Result' */}
                     </li>
                     <li onClick={() => navigate('/AddNotification')}>  {/* Render list item for notification page with click event to navigate */}
-                        <NotificationsIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
-                        <span>Update Message</span>  {/* Render text 'Update Notifications' */}
+                        <NotificationAddIcon className='icon' />  {/* Render NotificationsIcon with CSS class 'icon' */}
+                        <span>Notification</span>  {/* Render text 'Update Notifications' */}
                     </li>
                     <li onClick={() => navigate('/Analysis')}>  {/* Render list item for notification page with click event to navigate */}
-                        <AnalyticsIcon className='icon' />  {/* Render AnalyticsIcon with CSS class 'icon' */}
-                        <span>Placements Report</span>  {/* Render text 'Analysis Page' */}
+                        <BarChartIcon className='icon' />  {/* Render BarChartIcon with CSS class 'icon' */}
+                        <span>Placement's Report</span>  {/* Render text 'Analysis Page' */}
                     </li>
                     <li onClick={() => navigate('/ComAnalysis')}>  {/* Render list item for notification page with click event to navigate */}
-                        <AnalyticsIcon className='icon' />  {/* Render AnalyticsIcon with CSS class 'icon' */}
+                        <PieChartIcon className='icon' />  {/* Render PieChartIcon with CSS class 'icon' */}
                         <span>Company's Report</span>  {/* Render text 'Analysis Page' */}
                     </li>
 

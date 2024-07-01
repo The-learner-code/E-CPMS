@@ -29,7 +29,7 @@ const PlacementResults = () => {
         { field: 'email', headerName: 'Email', width: 250 },
         { field: 'department', headerName: 'Department', width: 300 },
         { field: 'company_name', headerName: 'Company', width: 300 },
-        { field: 'job_role', headerName: 'Job Role', width: 200 },
+        { field: 'job_role', headerName: 'Job Role', width: 250 },
     ];
 
     return (

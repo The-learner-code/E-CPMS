@@ -13,8 +13,10 @@ import MsgEntryForm from './Pages/MsgEntryForm';  // Importing the MsgEntryForm 
 import AddNotification from './Pages/AddNotification';  // Importing the AddNotification component
 import ListOfUsers from './Pages/ListOfUsers'; // Importing the ListOfUsers component
 import TechSupport from './Pages/TechSupport'; // Importing the TechSupport component
-import PlacementResult from './Reports/PlacementResult';
-import PlacementResultPie from './Reports/PlacementResultPie';
+import PlacementResult from './Reports/PlacementResult'; // Importing the PlacementResult component
+import PlacementResultPie from './Reports/PlacementResultPie'; // Importing the PlacementResultPie component
+import AddNotificationAdmin from './Pages/AddNotificationAdmin'; // Importing the AddNotificationAdmin component
+import MsgEntryFormAdmin from './Pages/MsgEntryFormAdmin';  // Importing the MsgEntryForm component
 
 
 const App = () => {
@@ -38,8 +40,10 @@ const App = () => {
           <Route path='/AddNotification' element={<AddNotification />} />  {/* Route for AddNotification page */}
           <Route path='/ListOfUsers' element={<ListOfUsers />} /> {/* Route for ListOfUsers page */}
           <Route path='/TechSupport' element={<TechSupport />} /> {/* Route for TechSupport page */}
-          <Route path='/Analysis' element={<PlacementResult />} /> {/* Route for TechSupport page */}
-          <Route path='/ComAnalysis' element={<PlacementResultPie />} /> {/* Route for TechSupport page */}
+          <Route path='/Analysis' element={<PlacementResult />} /> {/* Route for PlacementResult page */}
+          <Route path='/ComAnalysis' element={<PlacementResultPie />} /> {/* Route for PlacementResultPie page */}
+          <Route path='/AddNotificationAdmin' element={<AddNotificationAdmin />} /> {/* Route for AddNotificationAdmin page */}
+          <Route path='/MsgEntryFormAdmin' element={<MsgEntryFormAdmin />} />  {/* Route for MsgEntryForm page */}
         </Routes>
       </BrowserRouter>
     </div>

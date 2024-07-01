@@ -2,9 +2,10 @@ import React from 'react';  // Import React library
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook from React Router
 import { auth } from "../../firebase";  // Import 'auth' object from Firebase
 import '../../SassyCSS/sidebar.scss';  // Import styles for the sidebar component
-import AccountBoxIcon from '@mui/icons-material/AccountBox';  // Import AccountBoxIcon from Material-UI icons
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';  // Import AccountCircleIcon from Material-UI icons
 import LogoutIcon from '@mui/icons-material/Logout';  // Import LogoutIcon from Material-UI icons
-import SupportIcon from '@mui/icons-material/Support';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 import { signOut } from "firebase/auth";  // Import signOut function from Firebase auth
 import { toast, toastContainer } from '../../toastservice'; // Import ToastContainer and toast components from React Toastify
 
@@ -33,12 +34,16 @@ const Admin_Sidebar = () => {  // Define Admin_Sidebar functional component
             <div className="center">  {/* Render center section of sidebar */}
                 <ul>  {/* Render unordered list */}
                     <li onClick={() => navigate('/ListOfUsers')}>  {/* Render list item for ListOfUsers with click event to navigate */}
-                        <AccountBoxIcon className='icon' />  {/* Render AccountBoxIcon with CSS class 'icon' */}
+                        <AccountCircleIcon className='icon' />  {/* Render AccountCircleIcon with CSS class 'icon' */}
                         <span>User Details</span>  {/* Render text 'User Details' */}
                     </li>
                     <li onClick={() => navigate('/TechSupport')}>  {/* Render list item for TechSupport page with click event to navigate */}
-                        <SupportIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
+                        <ContactSupportIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
                         <span>Tech Support</span>  {/* Render text 'Tech Support' */} 
+                    </li>
+                    <li onClick={() => navigate('/AddNotificationAdmin')}>  {/* Render list item for Notification page with click event to navigate */}
+                        <NotificationAddIcon className='icon' />  {/* Render AssignmentTurnedInIcon with CSS class 'icon' */}
+                        <span>Notification</span>  {/* Render text 'Notification' */} 
                     </li>
                 </ul>
             </div>

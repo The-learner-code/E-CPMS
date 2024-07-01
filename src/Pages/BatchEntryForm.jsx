@@ -107,26 +107,35 @@ const BatchEntryForm = () => {
             {/* Department input field */}
             <div className="form-group">
               <label htmlFor="department">Department</label>
-              <input
-                type="text"
+              <select type="text"
                 id="department"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
                 placeholder='BCA / MCA / B.Sc / M.Sc / B.Tech / M.Tech'
-                required
-              />
+                required >
+                <option value="">Select Department</option>
+                <option value="BCA">BCA</option>
+                <option value="MCA">MCA</option>
+                <option value="B.Sc">B.Sc</option>
+                <option value="M.Sc">M.Sc</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="M.Tech">M.Tech</option>
+              </select>
             </div>
 
             {/* Department input field */}
             <div className="form-group">
               <label htmlFor="deparsbatchtment">Batch</label>
-              <input
-                type="text"
+              <select type="text"
                 id="sbatch"
                 value={sbatch}
                 onChange={(e) => setSbatch(e.target.value)}
-                required
-              />
+                required >
+                <option value="">Select Batch</option>
+                {Array.from({ length: 50 }, (_, i) => 1975 + i).map(year => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
             </div>
 
             {/* Company name input field */}

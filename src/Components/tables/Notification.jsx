@@ -47,8 +47,8 @@ const Tablenotify = () => {
 
     // Define columns for DataGrid component
     const columns = [
-        { field: 'timestamp', headerName: 'Timestamp', width: 200 },
-        { field: 'type', headerName: 'Type', width: 100 },
+        { field: 'timestamp', headerName: 'Timestamp (IST)', width: 200 },
+        { field: 'type', headerName: 'Type', width: 150 },
         { field: 'content', headerName: 'Content', width: 750, renderCell: (params) => (
             <div style={{ whiteSpace: 'normal', wordWrap: 'break-word' }} title={params.value}>
                 {params.value}
