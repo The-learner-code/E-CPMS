@@ -187,6 +187,11 @@ const UpdateProfile = () => {
             const uploadedPhotoURL = await handlePhotoUpload();
             const uploadedResumeURL = await handleResumeUpload();
             if (!uploadedResumeURL) {
+                toast.error("Resume is empty, Please add resume");
+                return;
+            }
+            if (!uploadedPhotoURL) {
+                toast.error("Photo is empty, Please add photo");
                 return;
             }
 

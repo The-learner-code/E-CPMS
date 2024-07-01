@@ -16,6 +16,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: transform 80ms ease-in;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        outline: none;
+    }
 }
 
 // Image inside button styling
@@ -28,6 +37,15 @@
 .btn.dark-btn {
     background: var(--primary-color);
     color: white;
+    transition: transform 80ms ease-in;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        outline: none;
+    }
 }
 
 // Navbar styling
@@ -41,7 +59,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-   color: whitesmoke;
+    color: whitesmoke;
 
     // Navbar logo styling
     .nv-logo {
@@ -99,8 +117,8 @@ nav {
             line-height: 1.4;
             color: rgba(255, 255, 255, 1);
             font-size: medium;
-        } 
-        
+        }
+
     }
 }
 

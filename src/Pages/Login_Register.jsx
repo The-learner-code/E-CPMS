@@ -96,7 +96,7 @@ function Login_Register() {
                 created: createdIST, // User account creation time in IST
                 signedIn: signedInIST, // Last sign-in time in IST
                 uid: user.uid, // User UID
-                type: user.email.includes("ecpms") ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
+                type: user.email.includes("enchancedcpms") ? 'Admin' : (user.email.includes("staff") ? 'Staff' : 'Student') // User type based on email
             };
 
             await setDoc(doc(db, "AuthDetails", user.email), userData); // Save user data to Firestore
