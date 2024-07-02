@@ -221,3 +221,18 @@ export const Paragraph = styled.p`
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
 `;
+
+// Checkbox label styling
+export const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: ${colors.primary};
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+`;

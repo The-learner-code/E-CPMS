@@ -37,6 +37,9 @@ const BatchEntryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const emailList = emails.split(/\s*,\s*|\s+/).filter(email => email); // Split by commas or whitespace
+    // Get current date and time in IST
+    const now = new Date();
+    const timestamp = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
     try {
       const batch = writeBatch(db); // Create a batch instance
@@ -46,6 +49,7 @@ const BatchEntryForm = () => {
       emailList.forEach(email => {
         const newDoc = doc(studentsRef);
         batch.set(newDoc, {
+          timestamp, // Add timestamp as a field in the document
           email,
           department,
           company_name: companyName,

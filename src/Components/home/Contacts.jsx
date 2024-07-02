@@ -101,7 +101,7 @@ const Contacts = () => {
             {/* Second column containing the contact form */}
             <div className="contact-col">
                 {/* Form with onSubmit handler */}
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} autoComplete='off'>
                     {/* Label and input for name */}
                     <label>Your Email Id</label>
                     <input type="email" name='Email_id' placeholder='Enter your Email' required />

@@ -18,7 +18,7 @@ import { toast, toastContainer } from '../toastservice';
 import { auth, db } from '../firebase';
 
 // Import Firestore functions for interacting with Firestore
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, where, getDocs, query, collection } from "firebase/firestore";
 
 //This library helps in manipulating time zones easily.
 import moment from 'moment-timezone';
@@ -32,6 +32,7 @@ function Login_Register() {
     const [rconpass, setRconpass] = useState(""); // State for register confirm password
     const [lemail, setLemail] = useState(""); // State for login email
     const [lpass, setLpass] = useState(""); // State for login password
+    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
     const navigate = useNavigate(); // Initialize navigate function for routing
 
@@ -57,28 +58,28 @@ function Login_Register() {
 
         // Validate email format
         if (!validateEmail(trimmedEmail)) {
-            toast.error("Please enter a valid Email_id...!", { autoClose: 2500 });
+            toast.error("Please enter a valid Email_id...!");
             resetForm();
             return;
         }
 
         // Validate password length
         if (trimmedPass.length < 6) {
-            toast.error("Password should not be less than 6 characters...!", { autoClose: 2500 });
+            toast.error("Password should not be less than 6 characters...!");
             resetForm();
             return;
         }
 
         // Validate confirm password length
         if (trimmedConPass.length < 6) {
-            toast.error("Confirm Password should not be less than 6 characters...!", { autoClose: 2500 });
+            toast.error("Confirm Password should not be less than 6 characters...!");
             resetForm();
             return;
         }
 
         // Validate if passwords match
         if (trimmedPass !== trimmedConPass) {
-            toast.error("Password and Confirm Password do not match...!", { autoClose: 2500 });
+            toast.error("Password and Confirm Password do not match...!");
             resetForm();
             return;
         }
@@ -100,13 +101,13 @@ function Login_Register() {
             };
 
             await setDoc(doc(db, "AuthDetails", user.email), userData); // Save user data to Firestore
-            toast.success(`${user.email} Registered Successfully, Please Login...!`, { autoClose: 2500 });
+            toast.success(`${user.email} Registered Successfully, Please Login...!`);
             setTimeout(() => {
                 toggle(true); // Toggle to sign-in view
                 resetForm(); // Reset form inputs
             }, 2500);
         } catch (error) {
-            toast.error(`Registration Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
+            toast.error(`Registration Unsuccessful. Error message: ${error.message}`);
             resetForm(); // Reset form inputs on error
         }
     };
@@ -126,10 +127,11 @@ function Login_Register() {
             await updateDoc(doc(db, "AuthDetails", user.email), {
                 signedIn: signedInIST // Update last sign-in time in Firestore
             });
+            console.log(signedInIST)
 
-            toast.success("Logged in Successfully...!", { autoClose: 2500 });
+            toast.success("Logged in Successfully...!");
             setTimeout(() => {
-                if (trimmedEmail.includes("enchancedcpms") ) { // Check if user is admin
+                if (trimmedEmail.includes("enchancedcpms")) { // Check if user is admin
                     navigate('/ListOfUsers'); // Navigate to admin page
                 } else if (trimmedEmail.includes("staff") && trimmedEmail.endsWith("@gmail.com")) { // Check if user is staff
                     navigate('/ListOfStudents'); // Navigate to staff page
@@ -138,29 +140,40 @@ function Login_Register() {
                 }
             }, 2500);
         } catch (error) {
-            toast.error(`Login Unsuccessful. Error message: ${error.message}`, { autoClose: 2500 });
+            toast.error(`Login Unsuccessful. Error message: ${error.message}`);
             resetForm(); // Reset form inputs on error
         }
     };
 
     // Function to handle forgot password process
     const handleForgotPassword = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        const trimmedEmail = lemail.trim(); // Trim login email
+        e.preventDefault();
+        const trimmedEmail = lemail.trim();
 
         if (!trimmedEmail) {
-            toast.error("Please enter your email address to reset password.", { autoClose: 2500 });
-            resetForm(); // Reset form inputs
+            toast.error("Please enter your email address to reset password.");
+            resetForm();
             return;
         }
 
         try {
-            await sendPasswordResetEmail(auth, trimmedEmail); // Send password reset email
-            toast.success("Password reset email sent successfully.", { autoClose: 2500 });
-            resetForm(); // Reset form inputs
+            // Check if email exists in the AuthDetails collection
+            const q = query(collection(db, "AuthDetails"), where("email", "==", trimmedEmail));
+            const querySnapshot = await getDocs(q);
+            const querySnapshotlist = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            console.log(querySnapshotlist)
+            if (querySnapshot.empty) {
+                toast.error("Error sending password reset email: User is not registered");
+                resetForm();
+                return;
+            }
+
+            await sendPasswordResetEmail(auth, trimmedEmail);
+            toast.success("Password reset email sent successfully.");
+            resetForm();
         } catch (error) {
-            toast.error(`Error sending password reset email: ${error.message}`, { autoClose: 2500 });
-            resetForm(); // Reset form inputs on error
+            toast.error(`Error sending password reset email: ${error.message}`);
+            resetForm();
         }
     };
 
@@ -186,10 +199,16 @@ function Login_Register() {
                         <Components.Input type='email' placeholder='Enter Email Id' value={remail} onChange={(e) => setRemail(e.target.value)} required />
 
                         {/* Register password input */}
-                        <Components.Input type='password' placeholder='Enter Password' value={rpass} onChange={(e) => setRpass(e.target.value)} required />
+                        <Components.Input type={showPassword ? 'text' : 'password'} placeholder='Enter Password' value={rpass} onChange={(e) => setRpass(e.target.value)} required />
 
                         {/* Register confirm password input */}
-                        <Components.Input type='password' placeholder='Confirm Password' value={rconpass} onChange={(e) => setRconpass(e.target.value)} required />
+                        <Components.Input type={showPassword ? 'text' : 'password'} placeholder='Confirm Password' value={rconpass} onChange={(e) => setRconpass(e.target.value)} required />
+
+                        {/* Show password checkbox */}
+                        <Components.CheckboxLabel>
+                            <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+                            Show Password
+                        </Components.CheckboxLabel>
 
                         {/* Register button */}
                         <Components.Button type="submit">Register Today</Components.Button>
@@ -207,7 +226,13 @@ function Login_Register() {
                         <Components.Input type='email' placeholder='Enter Email Id' value={lemail} onChange={(e) => setLemail(e.target.value)} required />
 
                         {/* Login password input */}
-                        <Components.Input type='password' placeholder='Enter Password' value={lpass} onChange={(e) => setLpass(e.target.value)} required />
+                        <Components.Input type={showPassword ? 'text' : 'password'} placeholder='Enter Password' value={lpass} onChange={(e) => setLpass(e.target.value)} required />
+
+                        {/* Show password checkbox */}
+                        <Components.CheckboxLabel>
+                            <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+                            Show Password
+                        </Components.CheckboxLabel>
 
                         {/* Forgot password link */}
                         <Components.Anchor href='#' onClick={handleForgotPassword}>Forgot your password...!</Components.Anchor>
