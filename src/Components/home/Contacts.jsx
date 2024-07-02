@@ -91,11 +91,11 @@ const Contacts = () => {
                 {/* List of contact details */}
                 <ul>
                     {/* Email contact detail */}
-                    <li><img src={mail_icon} alt="" />Cecpms@gmail.com</li>
+                    <li><img src={mail_icon} alt="" />enchancedcpms@gmail.com</li>
                     {/* Phone contact detail */}
                     <li><img src={phone_icon} alt="" />+91 978-6534-201</li>
                     {/* Address contact detail */}
-                    <li><img src={location_icon} alt="" />88 Seven block, Cambridge<br /> MA 02139, TamilNadu</li>
+                    <li><img src={location_icon} alt="" />88 block, Thanjavur<br /> MA 02139, TamilNadu</li>
                 </ul>
             </div>
             {/* Second column containing the contact form */}

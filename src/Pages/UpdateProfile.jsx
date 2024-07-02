@@ -137,8 +137,8 @@ const UpdateProfile = () => {
             toast.error("Name should not be empty or blank");
             return;
         }
-        if (registerno.trim() === "" || registerno.trim().length !== 11 || registerno !== emailPrefix) {
-            toast.error("Register Number should be exactly 11 digits and match the part before '@' in your email");
+        if (registerno.trim() === "" || registerno !== emailPrefix) {
+            toast.error("Register Number should be exactly match the part before '@' in your email");
             return;
         }
         if (batch.trim() === "") {
