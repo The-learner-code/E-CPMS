@@ -6,14 +6,7 @@ import { getStorage } from "firebase/storage"; // Import to handle Firebase stor
 
 // Firebase configuration object containing the project's API key and other identifiers
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyB75c74Bz3iSexHFP62g10Or7rAKOpjtV4",
-  authDomain: "e-cpms.firebaseapp.com",
-  projectId: "e-cpms",
-  storageBucket: "e-cpms.appspot.com",
-  messagingSenderId: "978178498404",
-  appId: "1:978178498404:web:cc17af632f9c6d8ed0a471"
-};
+
 
 // Initialize Firebase app with the provided configuration
 const app = initializeApp(firebaseConfig);
