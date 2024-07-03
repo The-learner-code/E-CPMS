@@ -31,7 +31,7 @@ const UpdateProfile = () => {
     const [resumeURL, setResumeURL] = useState(""); // State for resume URL
 
     // Effect to set email id if user is logged in
-    /*useEffect(() => {
+    useEffect(() => {
         const user = auth.currentUser;
         if (user) {
             setEmailid(user.email);
@@ -41,7 +41,7 @@ const UpdateProfile = () => {
                 navigate('/');
             }, 2500);
         }
-    }, [navigate]);*/
+    }, [navigate]);
 
     // Effect to fetch user data from Firestore
     useEffect(() => {
