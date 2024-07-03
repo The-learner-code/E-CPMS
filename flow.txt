@@ -1,0 +1,34 @@
+Landing Page => {
+    Home => Able to navigate Register & Login
+    About Us => General Information
+    Contact Us => Used Web3form, Data will be stored in db (TechSupport) and same will be notified by email (ecpms@gmail.com)
+};
+
+Login and Register => {
+    { We have Overlay toggle feature }
+    Register => Once user enters the required detail,
+        firebase auth will check the data if present it will revert error else data will be registered and same will be stored in db (AuthDetails).
+    Login => User can enter registered email id and password,
+        firebase auth will check the data if present it will revert error else the last signed in date will be updated in db (AuthDetails) and navigated to the respective pages.
+    Forget Password => We have a link in login page where we can use that to change our login password.
+}
+
+Admin => {
+    List Of Users (User Cred) => Admin can able to view the all type of user cred details with lastsign in option.
+    Tech Support (Tech Support) => Here Admin can able to view the details filled out from the contact us form.
+}
+
+Staff => {
+    List Of Student (Student Detail) => staff can able to view all the student details with image and resume from thr db (StudentsInformation).
+    Batch Entry Form => Here staff can able to update the placement results and the same can be add in db (PlacedStudents).
+    Msg Entry Form => Here staff can able to add Notification and the same can be add in db (Notification_Logs).
+    Add Notification (Notification) => Here staff can able to view the updated notification from the db (Notification_Logs).
+    Add Placement Results (PlacementResults) => Here staff can able to view the updated placement results from the db (PlacedStudents).
+}
+
+Student = {
+    View Profile => Here student can able view his/her profile detail from db (StudentsInformation).
+    Update Profile => Here student can add / update his/her detail and stored to db (StudentsInformation).
+    View Notification Msg (ViewNotification) => Here student can able to view the notification message, that to be fetched from the db (Notification_Logs).
+    View Placement Results (ViewResults) => Here student can able to view placement results, that to be fetched from the db (PlacedStudents).
+}

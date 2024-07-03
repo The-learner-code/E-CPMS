@@ -1,0 +1,48 @@
+.result {
+    display: flex;
+    width: 100%;
+
+    .placementresultcontainer {
+        flex: 6;
+
+        .addresult {
+            padding-top: 10px;
+            padding-left: 1100px;
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+                outline: 0;
+                border: 0;
+                color: darkgreen;
+                background: lightgreen;
+                cursor: pointer;
+                transition: transform 80ms ease-in;
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .listcontainer {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 10px;
+            margin: 10px;
+            width: 1240px;
+            background-color: rgb(230, 227, 227);
+            border-radius: 10px;
+
+            .list-title {
+                font-weight: 600;
+                color: var(--primary-color);
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

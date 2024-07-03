@@ -1,0 +1,53 @@
+.navbar {
+    background: var(--primary-color);
+    /* Navy Blue */
+    height: 50px;
+    border-bottom: 0.5px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    .wrapper {
+        color: #ffffff;
+        width: 100%;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .items {
+            display: flex;
+            align-items: center;
+
+            .item {
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                .icon {
+                    font-size: 20px;
+                    transition: color 0.3s ease;
+                }
+
+                &:hover .icon,
+                &:hover span {
+                    color: var(--hover-color);
+                    /* Dark Navy Blue hover color */
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
