@@ -31,7 +31,23 @@ const StudentTable = () => {
     { field: 'Current_Semester', headerName: 'Semester', width: 80 },
     { field: 'Current_Cgpa', headerName: 'CGPA', width: 50 },
     { field: 'Placement', headerName: 'Placement', width: 100 },
-    { field: 'Address', headerName: 'Address', width: 230 },
+    {
+      field: 'Address',
+      headerName: 'Address',
+      width: 250, // Adjust the width of Address column as needed
+      renderCell: (params) => (
+        <div style={{ 
+          whiteSpace: 'pre-wrap', 
+          wordBreak: 'break-word', 
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          lineHeight: '1.2',  // Reduced line height
+          padding: '4px 0'   // Adjust padding to fine-tune spacing
+        }}>
+          {params.value}
+        </div>
+      ),
+    },
     { field: 'District', headerName: 'District', width: 130 },
     { field: 'State', headerName: 'State', width: 100 },
     { field: 'Pincode', headerName: 'Pincode', width: 80 },
@@ -65,12 +81,13 @@ const StudentTable = () => {
           <DataGrid
             rows={students}
             columns={columns}
+            getRowId={(row) => row.id}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 10 }, // Initial pagination settings
               },
-            }}
-            pageSizeOptions={[5, 10]}
+          }}
+          pageSizeOptions={[5, 10, 20]} // Options for page size
           />
         </div>
       )}

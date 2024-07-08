@@ -46,7 +46,18 @@ const TechSupportTable = () => {
     { field: 'Timestamp', headerName: 'Timestamp (IST)', width: 200 },  // Timestamp column
     { field: 'Email_id', headerName: 'Email', width: 200 },  // Email column
     { field: 'Registered_no', headerName: 'Registered Number', width: 150 },  // Registered number column
-    { field: 'Message', headerName: 'Message', width: 800 },  // Message column
+    { field: 'Message', headerName: 'Message', width: 500, renderCell: (params) => (
+      <div style={{ 
+        whiteSpace: 'pre-wrap', 
+        wordBreak: 'break-word', 
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        lineHeight: '1.2',  // Reduced line height
+        padding: '4px 0'   // Adjust padding to fine-tune spacing
+      }}>
+        {params.value}
+      </div>
+    ),},  // Message column
   ];
 
   // Render the DataGrid component with the fetched data
@@ -56,13 +67,14 @@ const TechSupportTable = () => {
         <DataGrid
           rows={techSupportData}  // Rows data
           columns={columns}  // Columns definition
-          loading={loading}  // Loading state
+          getRowId={(row) => row.id}
+          loading={loading} // Loading state
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },  // Initial pagination settings
+              paginationModel: { page: 0, pageSize: 10 }, // Initial pagination settings
             },
           }}
-          pageSizeOptions={[5, 10]}  // Options for page size
+          pageSizeOptions={[5, 10, 20]} // Options for page size
         />
       </div>
     </div>
