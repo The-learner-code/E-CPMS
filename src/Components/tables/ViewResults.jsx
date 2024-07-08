@@ -34,9 +34,9 @@ const ViewResults = () => {
 
   // Define columns for the DataGrid
   const columns = [
-    { field: 'timestamp', headerName: 'Timestamp(IST)', width: 250 },
-    { field: 'email', headerName: 'Email', width: 250 },
-    { field: 'department', headerName: 'Department', width: 300 },
+    { field: 'timestamp', headerName: 'Timestamp(IST)', width: 180 },
+    { field: 'email', headerName: 'Email', width: 210 },
+    { field: 'department', headerName: 'Department', width: 200 },
     { field: 'company_name', headerName: 'Company', width: 300 },
     { field: 'job_role', headerName: 'Job Role', width: 200 },
   ];

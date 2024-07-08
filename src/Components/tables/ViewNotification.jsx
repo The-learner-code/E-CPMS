@@ -45,20 +45,26 @@ const Tablenotify = () => {
 
     // Define columns for the DataGrid
     const columns = [
-        { field: 'timestamp', headerName: 'Timestamp', width: 200 }, // Timestamp column
-        { field: 'type', headerName: 'Type', width: 100 }, // Type column
+        { field: 'timestamp', headerName: 'Timestamp', width: 170 }, // Timestamp column
+        { field: 'type', headerName: 'Type', width: 130 }, // Type column
         {
-            field: 'content', headerName: 'Content', width: 750, renderCell: (params) => (
-                // Content column with word wrapping and tooltip
-                <div style={{ whiteSpace: 'normal', wordWrap: 'break-word' }} title={params.value}>
-                    {params.value}
+            field: 'content', headerName: 'Content', width: 400, renderCell: (params) => (
+                <div style={{ 
+                  whiteSpace: 'pre-wrap', 
+                  wordBreak: 'break-word', 
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  lineHeight: '1.2',  // Reduced line height
+                  padding: '4px 0'   // Adjust padding to fine-tune spacing
+                }}>
+                  {params.value}
                 </div>
-            )
+              ),
         },
         { field: 'valid_from', headerName: 'Valid From', width: 150 }, // Valid From column
         { field: 'valid_to', headerName: 'Valid To', width: 150 }, // Valid To column
         {
-            field: 'link', headerName: 'Link', width: 200, renderCell: (params) => (
+            field: 'link', headerName: 'Link', width: 170, renderCell: (params) => (
                 // Link column with clickable links
                 <a href={params.value} target="_blank" rel="noopener noreferrer">
                     Link
@@ -75,6 +81,7 @@ const Tablenotify = () => {
                 <DataGrid
                     rows={notifications} // Rows data
                     columns={columns} // Columns definition
+                    getRowId={(row) => row.id}
                     loading={loading} // Loading state
                     initialState={{
                         pagination: {
